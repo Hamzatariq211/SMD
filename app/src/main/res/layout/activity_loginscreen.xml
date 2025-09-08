@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    tools:context=".loginscreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Socially"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="@color/smd_text_color"
+            android:gravity="center"
+            android:fontFamily="@font/rebelton" />
+
+        <!-- Circular space for profile picture -->
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/circle_placeholder"
+            android:scaleType="centerCrop"
+            android:contentDescription="Profile Picture"
+            android:clipToOutline="true" />
+
+        <!-- Sample text for user name -->
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Jacob_w"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:gravity="center" />
+
+        <!-- Login Button -->
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Login"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/smd_text_color"
+            android:gravity="center"
+            android:clipToOutline="true"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="16dp"
+            android:stateListAnimator="@null" />
+
+
+        <!-- Switch Accounts TextView -->
+        <TextView
+            android:id="@+id/switch_accounts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Switch Accounts"
+            android:textSize="14sp"
+            android:textColor="@color/smd_text_color"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:gravity="center" />
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Top boundary -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#B0B0B0" />  <!-- light gray line -->
+
+    <!-- Second part with weight 1 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <!-- "Don't have an account?" -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? "
+            android:textSize="16sp"
+            android:textColor="#88000000"
+        android:gravity="center" />
+
+
+        <!-- "Sign up" -->
+        <TextView
+            android:id="@+id/tvSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign up"
+            android:textSize="16sp"
+            android:textColor="@color/smd_text_color"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    tools:context=".RegisterScreen">
+
+    <!-- LinearLayout with 10 equal parts -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">
+
+            <!-- Back icon (left) -->
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/back"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:padding="8dp" />
+
+            <!-- Socially text (center) -->
+            <TextView
+                android:id="@+id/tvSocially"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Socially"
+                android:textSize="30sp"
+                android:textColor="@android:color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/rebelton"/>
+
+            <!-- Subtitle text (below Socially) -->
+            <TextView
+                android:id="@+id/tvSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create an account and sign up"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:layout_below="@id/tvSocially"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="6dp"/>
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+        <!-- SECOND PART -->
+        <ImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@android:drawable/ic_menu_camera"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_bg"
+            android:padding="2dp"
+            android:contentDescription="Profile Picture"
+            android:layout_gravity="center"/>
+
+
+
+
+
+
+
+
+        <!-- USERNAME -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp">   <!-- 👈 Added top space -->
+
+            <!-- Label -->
+            <TextView
+                android:id="@+id/tvUsernameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Input -->
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint=""
+                android:inputType="text|textNoSuggestions"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:autofillHints="username"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Underline -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@android:color/darker_gray"/>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+        <!-- First Name -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp">   <!-- 👈 Added top space -->
+
+            <!-- Label -->
+            <TextView
+                android:id="@+id/tvFirstNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="First Name"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Input -->
+            <EditText
+                android:id="@+id/etFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint=""
+                android:inputType="text|textNoSuggestions"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:autofillHints="username"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Underline -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@android:color/darker_gray"/>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Last Name -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp">   <!-- 👈 Top space -->
+
+            <!-- Label -->
+            <TextView
+                android:id="@+id/tvLastNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Name"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Input -->
+            <EditText
+                android:id="@+id/etLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint=""
+                android:inputType="text|textNoSuggestions"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:autofillHints="username"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Underline -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@android:color/darker_gray"/>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Date of Birth -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp">
+
+            <!-- Label -->
+            <TextView
+                android:id="@+id/tvDobLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of Birth"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Input (non-editable, opens DatePicker) -->
+            <EditText
+                android:id="@+id/etDob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:focusable="false"
+                android:clickable="true"
+                android:inputType="none"
+                android:singleLine="true"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Underline -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@android:color/darker_gray"/>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Email -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp">   <!-- 👈 Top space -->
+
+            <!-- Label -->
+            <TextView
+                android:id="@+id/tvEmailLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Input -->
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:autofillHints="emailAddress"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Underline -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@android:color/darker_gray"/>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Password -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp">
+
+            <!-- Label -->
+            <TextView
+                android:id="@+id/tvPasswordLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Input -->
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:autofillHints="password"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Underline -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@android:color/darker_gray"/>
+        </LinearLayout>
+
+
+
+
+        <!-- Register Button -->
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Register"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#FF5722"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"/>
+
+    </LinearLayout>
+</RelativeLayout>
