@@ -3,6 +3,7 @@ package com.hamzatariq.i210396
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
@@ -27,12 +28,10 @@ class RegisterScreen : AppCompatActivity() {
         // 📌 Back button (ImageView)
         val ivBack = findViewById<ImageView>(R.id.ivBack)
         ivBack.setOnClickListener {
-            val intent = Intent(this, loginscreen::class.java)
-            startActivity(intent)
             finish() // closes RegisterScreen so it won’t stay in back stack
         }
 
-        // 📌 Find the DOB input field
+        // 📌 DOB input field
         val etDob = findViewById<EditText>(R.id.etDob)
 
         etDob.setOnClickListener {
@@ -44,7 +43,6 @@ class RegisterScreen : AppCompatActivity() {
             val datePicker = DatePickerDialog(
                 this,
                 { _, selectedYear, selectedMonth, selectedDay ->
-                    // Set selected date in dd/MM/yyyy format
                     etDob.setText("$selectedDay/${selectedMonth + 1}/$selectedYear")
                 },
                 year, month, day
@@ -52,8 +50,15 @@ class RegisterScreen : AppCompatActivity() {
 
             // Prevent selecting future dates
             datePicker.datePicker.maxDate = System.currentTimeMillis()
-
             datePicker.show()
+        }
+
+        // 📌 Register button → Navigate to HomePage
+        val btnRegister = findViewById<Button>(R.id.btnRegister)
+        btnRegister.setOnClickListener {
+            val intent = Intent(this, HomePage::class.java)
+            startActivity(intent)
+            finish() // optional: close RegisterScreen so user can’t go back
         }
     }
 }

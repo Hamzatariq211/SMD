@@ -4,17 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class HomePage : AppCompatActivity() {
+class dm : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_home_page)
+        setContentView(R.layout.activity_dm)
 
+        // Handle system bars for LinearLayout root
         val mainLayout = findViewById<LinearLayout>(R.id.main)
         ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -22,17 +24,16 @@ class HomePage : AppCompatActivity() {
             insets
         }
 
-        // Reference to explore ImageView
-        val exploreIcon = findViewById<ImageView>(R.id.exlplore)
-        exploreIcon.setOnClickListener {
-            val intent = Intent(this, Explore::class.java)
-            startActivity(intent)
+        // Back button
+        val backIcon = findViewById<ImageView>(R.id.backIcon)
+        backIcon.setOnClickListener {
+            finish()
         }
 
-        // Reference to share ImageView
-        val shareIcon = findViewById<ImageView>(R.id.share)
-        shareIcon.setOnClickListener {
-            val intent = Intent(this, dm::class.java)
+        // Open chat when clicking on the row
+        val openChatRow = findViewById<RelativeLayout>(R.id.openchat)
+        openChatRow.setOnClickListener {
+            val intent = Intent(this, chat::class.java) // Replace Chat::class.java with your chat activity
             startActivity(intent)
         }
     }

@@ -2,6 +2,7 @@ package com.hamzatariq.i210396
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
@@ -9,11 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class HomePage : AppCompatActivity() {
+class Explore : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_home_page)
+        setContentView(R.layout.activity_explore)
 
         val mainLayout = findViewById<LinearLayout>(R.id.main)
         ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { v, insets ->
@@ -22,17 +23,17 @@ class HomePage : AppCompatActivity() {
             insets
         }
 
-        // Reference to explore ImageView
-        val exploreIcon = findViewById<ImageView>(R.id.exlplore)
-        exploreIcon.setOnClickListener {
-            val intent = Intent(this, Explore::class.java)
+        // Reference to search EditText
+        val searchEditText = findViewById<EditText>(R.id.searchEditText)
+        searchEditText.setOnClickListener {
+            val intent = Intent(this, Explore2::class.java)
             startActivity(intent)
         }
 
-        // Reference to share ImageView
-        val shareIcon = findViewById<ImageView>(R.id.share)
-        shareIcon.setOnClickListener {
-            val intent = Intent(this, dm::class.java)
+        // Reference to home ImageView
+        val homeIcon = findViewById<ImageView>(R.id.home)
+        homeIcon.setOnClickListener {
+            val intent = Intent(this, HomePage::class.java)
             startActivity(intent)
         }
     }

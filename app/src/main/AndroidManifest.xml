@@ -13,16 +13,26 @@
         android:theme="@style/Theme.I210396"
         tools:targetApi="31">
         <activity
+            android:name=".chat"
+            android:exported="true"/>
+
+        <activity
+            android:name=".dm"
+            android:exported="true" />
+        <activity
+            android:name=".Explore2"
+            android:exported="false" />
+        <activity
+            android:name=".Explore"
+            android:exported="true" />
+        <activity
+            android:name=".SwitchAccounts"
+            android:exported="true" />
+
+
+        <activity
             android:name=".HomePage"
-            android:exported="true">
-
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-
-        </activity>
+            android:exported="true"/>
 
         <activity
             android:name=".RegisterScreen"
@@ -33,7 +43,11 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

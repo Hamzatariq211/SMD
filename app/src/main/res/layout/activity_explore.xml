@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+
+    <!-- Part 1: Small -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="center_vertical">
+
+        <!-- Search input with icon inside -->
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search..."
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext"
+            android:singleLine="true"
+            android:drawableStart="@drawable/icon2"
+            android:drawablePadding="8dp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"/>
+    </LinearLayout>
+
+
+
+
+
+    <!-- Part 2: Small -->
+    <LinearLayout
+        android:id="@+id/part2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+
+        android:weightSum="4"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Shop"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="@drawable/outlined_category"
+            android:textColor="@color/smd_text_color"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sports"
+            android:gravity="center"
+            android:padding="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/outlined_category"
+            android:textColor="@color/smd_text_color"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Auto"
+            android:gravity="center"
+            android:padding="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/outlined_category"
+            android:textColor="@color/smd_text_color"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Music"
+            android:gravity="center"
+            android:padding="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/outlined_category"
+            android:textColor="@color/smd_text_color"/>
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Part 3: Largest (Instagram-style, RelativeLayout only, edge-to-edge) -->
+    <RelativeLayout
+        android:id="@+id/part3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10">
+
+        <!-- === TOP BLOCK === -->
+        <!-- Left small (top-left) -->
+        <ImageView
+            android:id="@+id/pic1"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:src="@drawable/pic1"
+            android:scaleType="centerCrop"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
+        <!-- Tall 2x2 on the right (fills remaining width to the end) -->
+        <ImageView
+            android:id="@+id/pic2"
+            android:layout_width="match_parent"
+            android:layout_height="228dp"
+            android:src="@drawable/pic2"
+            android:scaleType="centerCrop"
+            android:layout_toEndOf="@id/pic1"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@id/pic1"
+            android:layout_marginStart="4dp" />
+
+        <!-- Left small (under pic1) -->
+        <ImageView
+            android:id="@+id/pic3"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:src="@drawable/pic3"
+            android:scaleType="centerCrop"
+            android:layout_below="@id/pic1"
+            android:layout_alignStart="@id/pic1"
+            android:layout_marginTop="4dp" />
+
+        <!-- === ROW 3 (edge-to-edge) === -->
+        <!-- Left fixed -->
+        <ImageView
+            android:id="@+id/pic4"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:src="@drawable/pic4"
+            android:scaleType="centerCrop"
+            android:layout_below="@id/pic3"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="4dp" />
+
+        <!-- Right fixed -->
+        <ImageView
+            android:id="@+id/pic6"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:src="@drawable/pic6"
+            android:scaleType="centerCrop"
+            android:layout_below="@id/pic2"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="4dp" />
+
+        <!-- Middle stretches between left & right so row is edge-to-edge -->
+        <ImageView
+            android:id="@+id/pic5"
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:src="@drawable/pic5"
+            android:scaleType="centerCrop"
+            android:layout_below="@id/pic2"
+            android:layout_toEndOf="@id/pic4"
+            android:layout_toStartOf="@id/pic6"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="4dp" />
+
+        <!-- === ROW 4 (edge-to-edge) === -->
+        <!-- Left fixed -->
+        <ImageView
+            android:id="@+id/pic7"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:src="@drawable/pic7"
+            android:scaleType="centerCrop"
+            android:layout_below="@id/pic4"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="4dp" />
+
+        <!-- Right fixed -->
+        <ImageView
+            android:id="@+id/pic9"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:src="@drawable/pic9"
+            android:scaleType="centerCrop"
+            android:layout_below="@id/pic6"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="4dp" />
+
+        <!-- Middle stretches -->
+        <ImageView
+            android:id="@+id/pic8"
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:src="@drawable/pic8"
+            android:scaleType="centerCrop"
+            android:layout_below="@id/pic5"
+            android:layout_toEndOf="@id/pic7"
+            android:layout_toStartOf="@id/pic9"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="4dp" />
+
+        <!-- === BOTTOM BLOCK (no bottom gap) === -->
+        <!-- Left wide spans 2 columns and is pinned to bottom -->
+        <ImageView
+            android:id="@+id/pic10"
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:src="@drawable/pic10"
+            android:scaleType="centerCrop"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/pic11"
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/pic7" />
+
+        <!-- Right small, pinned to end and bottom -->
+        <ImageView
+            android:id="@+id/pic11"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:src="@drawable/pic11"
+            android:scaleType="centerCrop"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="4dp" />
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon3"
+            android:contentDescription="Icon 0"
+            android:scaleType="centerInside"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon2bold"
+            android:contentDescription="Icon 1"
+            android:scaleType="centerInside"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon1"
+            android:contentDescription="Icon 2"
+            android:scaleType="centerInside"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon"
+            android:contentDescription="Icon 3"
+            android:scaleType="centerInside"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:src="@drawable/profile"
+            android:contentDescription="Default camera icon"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:clipToOutline="true"/>
+    </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>

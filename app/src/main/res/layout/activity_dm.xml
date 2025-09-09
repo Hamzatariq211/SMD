@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <!-- Part 1: Small -->
+    <LinearLayout
+        android:id="@+id/part1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        >
+
+        <!-- Section 1: Back icon -->
+        <ImageView
+            android:id="@+id/backIcon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/back"
+            android:contentDescription="Back"
+            android:scaleType="centerInside"/>
+
+        <!-- Section 2: Username -->
+        <TextView
+            android:id="@+id/usernameText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="natasha_w"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/smd_text_color"/>
+
+        <!-- Section 3: Plus icon -->
+        <ImageView
+            android:id="@+id/plusIcon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/plus"
+            android:contentDescription="Add"
+            android:scaleType="centerInside"/>
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Part 2: Small -->
+    <LinearLayout
+        android:id="@+id/part2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:orientation="vertical"
+        android:padding="8dp"
+        >
+
+        <!-- Search input field -->
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search..."
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext"
+            android:singleLine="true"
+            android:drawableStart="@drawable/rounded_edittext"
+            android:drawablePadding="8dp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"/>
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Part 3: Instagram-style DM list -->
+    <RelativeLayout
+        android:id="@+id/part3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:id="@+id/dmList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Row 1 -->
+            <RelativeLayout
+                android:id="@+id/openchat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <!-- Profile image -->
+                <ImageView
+                    android:id="@+id/dm1"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/dm1"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/circlemask2"
+                    android:clipToOutline="true"/>
+
+
+                <!-- Username + message -->
+                <LinearLayout
+                    android:id="@+id/textContainer1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_toEndOf="@id/dm1"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:id="@+id/username1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="joshua_l"
+                        android:textStyle="bold"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/message1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Have a nice day, bro!"
+                        android:textSize="14sp"
+                        android:textColor="#777" />
+                </LinearLayout>
+
+                <!-- Time -->
+                <TextView
+                    android:id="@+id/time1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="· now"
+                    android:textSize="12sp"
+                    android:textColor="#999"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@id/username1" />
+
+                <!-- Camera icon -->
+                <ImageView
+                    android:id="@+id/cam1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/camera"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/time1"
+                    android:layout_marginTop="4dp" />
+            </RelativeLayout>
+
+            <!-- Row 2 (copy and edit) -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/dm2"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/dm2"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/circlemask2"
+                    android:clipToOutline="true" />
+
+
+                <LinearLayout
+                    android:id="@+id/textContainer2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_toEndOf="@id/dm2"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:id="@+id/username2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="karennne"
+                        android:textStyle="bold"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/message2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="I heard this is a good movie..."
+                        android:textSize="14sp"
+                        android:textColor="#777" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/time2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="· now"
+                    android:textSize="12sp"
+                    android:textColor="#999"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@id/username2" />
+
+                <ImageView
+                    android:id="@+id/cam2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/camera"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/time2"
+                    android:layout_marginTop="4dp" />
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Part 4: Small -->
+    <LinearLayout
+        android:id="@+id/part4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+
+        android:padding="8dp">
+
+        <!-- Camera icon -->
+        <ImageView
+            android:id="@+id/cameraIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/camera"
+            android:contentDescription="Camera"
+            android:scaleType="centerInside"/>
+
+        <!-- Text below the icon -->
+        <TextView
+            android:id="@+id/cameraText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Camera"
+            android:textColor="@color/smd_text_color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="0dp"
+            android:gravity="center"/>
+    </LinearLayout>
+
+
+</LinearLayout>

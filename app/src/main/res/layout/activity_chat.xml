@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <!-- Part 1: Small -->
+    <LinearLayout
+        android:id="@+id/part1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+
+        android:padding="8dp">
+
+        <!-- Top bar: horizontal layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Back button -->
+            <ImageView
+                android:id="@+id/backIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/back"
+                android:contentDescription="Back"
+                android:scaleType="centerInside"/>
+
+            <!-- Profile image -->
+            <ImageView
+                android:id="@+id/profileIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/dm1"
+                android:contentDescription="Profile"
+                android:scaleType="centerCrop"
+                android:background="@drawable/circlemask2"
+                android:clipToOutline="true"/>
+
+            <!-- Username -->
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="joshua"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp"/>
+
+            <!-- Video camera icon -->
+            <ImageView
+                android:id="@+id/videoCamera"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/videocamera"
+                android:contentDescription="Video Call"
+                android:scaleType="centerInside"/>
+
+            <!-- Info icon -->
+            <ImageView
+                android:id="@+id/infoIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/info"
+                android:contentDescription="Info"
+                android:scaleType="centerInside"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Part 2: Very Large -->
+    <LinearLayout
+        android:id="@+id/part2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical"
+        >
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Part 3: Medium (Chat bubble style) -->
+    <LinearLayout
+        android:id="@+id/part3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.7"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:background="@android:color/white">
+
+        <!-- Timestamp -->
+        <TextView
+            android:id="@+id/timeStamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4:49 PM"
+            android:textSize="12sp"
+            android:textColor="#777"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="8dp" />
+
+        <!-- Message bubble (right aligned) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/messageBubble"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello"
+                android:textColor="@android:color/white"
+                android:padding="10dp"
+                android:background="@drawable/chat_bubble_right"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+    <!-- Part 4: Small (Message input bar) -->
+    <LinearLayout
+        android:id="@+id/part4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:background="@android:color/white">
+
+        <!-- Input bar -->
+        <LinearLayout
+            android:id="@+id/messageBar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/input_bg"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
+
+            <!-- Camera (left) -->
+            <FrameLayout
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+
+                android:layout_marginEnd="8dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/camera"
+                    android:contentDescription="@string/app_name"/>
+            </FrameLayout>
+
+            <!-- Text input (placeholder only) -->
+            <EditText
+                android:id="@+id/messageInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Message..."
+                android:maxLines="1"
+                android:singleLine="true"
+                android:background="@android:color/transparent"
+                android:textSize="14sp"
+                android:imeOptions="actionSend"/>
+
+            <!-- Mic -->
+            <ImageView
+                android:id="@+id/btnMic"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/microphone"
+                android:layout_marginStart="8dp"
+                android:contentDescription="@string/app_name"/>
+
+            <!-- Image -->
+            <ImageView
+                android:id="@+id/btnImage"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/image"
+                android:layout_marginStart="12dp"
+                android:contentDescription="@string/app_name"/>
+
+            <!-- GIF (dark rounded chip) -->
+            <FrameLayout
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="12dp"
+                >
+
+                <ImageView
+                    android:id="@+id/btnGif"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/gif"
+                    android:contentDescription="@string/app_name"/>
+            </FrameLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
