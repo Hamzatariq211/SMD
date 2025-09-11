@@ -16,6 +16,7 @@
 
         <!-- Camera -->
         <ImageView
+            android:id="@+id/camera"
             android:layout_width="10dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -100,13 +101,13 @@
 
                 <ImageView
                     android:id="@+id/story_image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/ic_placeholder"
-                    android:scaleType="centerCrop"
+                    android:layout_width="70dp"
+                    android:layout_height="56dp"
                     android:background="@drawable/circle_mask"
                     android:clipToOutline="true"
-                    android:contentDescription="Story" />
+                    android:contentDescription="Story"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_placeholder" />
             </LinearLayout>
 
             <!-- + sign (bottom right of story circle) -->
@@ -541,6 +542,7 @@
             android:scaleType="centerInside"/>
 
         <ImageView
+            android:id="@+id/post"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -549,6 +551,7 @@
             android:scaleType="centerInside"/>
 
         <ImageView
+            android:id="@+id/like"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -557,6 +560,7 @@
             android:scaleType="centerInside"/>
 
         <ImageView
+            android:id="@+id/profile"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"

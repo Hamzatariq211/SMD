@@ -36,5 +36,26 @@ class Explore : AppCompatActivity() {
             val intent = Intent(this, HomePage::class.java)
             startActivity(intent)
         }
+
+        // Reference to like ImageView
+        val likeIcon = findViewById<ImageView>(R.id.like)
+        likeIcon.setOnClickListener {
+            val intent = Intent(this, likeFollowing::class.java)
+            startActivity(intent)
+        }
+
+        // ✅ Reference to profile ImageView
+        val profileIcon = findViewById<ImageView>(R.id.profile)
+        profileIcon.setOnClickListener {
+            val intent = Intent(this, profile::class.java)
+            startActivity(intent)
+        }
+
+        // ✅ Reference to post ImageView
+        val postIcon = findViewById<ImageView>(R.id.post)
+        postIcon.setOnClickListener {
+            val intent = Intent(this, AddPost::class.java) // opens AddPost activity
+            startActivity(intent)
+        }
     }
 }

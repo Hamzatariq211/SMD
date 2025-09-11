@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AddPost">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal"
+
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <!-- Cancel -->
+        <TextView
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="start" />
+
+        <!-- Recent -->
+        <TextView
+            android:id="@+id/btnRecent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recent"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <!-- Next -->
+        <TextView
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_weight="1"
+            android:gravity="end" />
+    </LinearLayout>
+
+
+    <!-- Part 2: Large (Image Preview with Bottom Options) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@android:color/white">
+
+        <!-- Image Preview -->
+        <ImageView
+            android:id="@+id/previewImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dm2" /> <!-- replace with your image -->
+
+        <!-- Bottom Options -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:padding="8dp"
+            android:background="#66000000"> <!-- semi-transparent black -->
+
+            <!-- Infinity -->
+            <ImageView
+                android:id="@+id/btnInfinity"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/infinity"
+                android:tint="@android:color/white"
+                android:layout_marginEnd="12dp" />
+
+            <!-- Layout/Grid -->
+            <ImageView
+                android:id="@+id/btnLayout"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/grid"
+                android:tint="@android:color/white"
+                android:layout_marginEnd="12dp" />
+
+            <!-- Select Multiple -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/rounded_dark_bg">
+
+                <ImageView
+                    android:id="@+id/btnSelectMultipleIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/select"
+                    android:tint="@android:color/white"
+                    android:layout_marginEnd="6dp" />
+
+                <TextView
+                    android:id="@+id/btnSelectMultiple"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SELECT MULTIPLE"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Part 3: Grid Gallery -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:background="@android:color/white">
+
+        <!-- Row 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:src="@drawable/pics1"
+                android:scaleType="centerCrop"
+                android:layout_margin="1dp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:src="@drawable/pics2"
+                android:scaleType="centerCrop"
+                android:layout_margin="1dp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:src="@drawable/pics3"
+                android:scaleType="centerCrop"
+                android:layout_margin="1dp" />
+        </LinearLayout>
+
+        <!-- Row 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:src="@drawable/pics4"
+                android:scaleType="centerCrop"
+                android:layout_margin="1dp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:src="@drawable/pics5"
+                android:scaleType="centerCrop"
+                android:layout_margin="1dp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:src="@drawable/pics6"
+                android:scaleType="centerCrop"
+                android:layout_margin="1dp" />
+        </LinearLayout>
+
+        <!-- Row 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:src="@drawable/pics7"
+                android:scaleType="centerCrop"
+                android:layout_margin="1dp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:src="@drawable/pics8"
+                android:scaleType="centerCrop"
+                android:layout_margin="1dp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:src="@drawable/pic10"
+                android:scaleType="centerCrop"
+                android:layout_margin="1dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Part 4: Small (Footer Tabs) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:gravity="center">
+
+        <!-- Library -->
+        <TextView
+            android:id="@+id/tabLibrary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Library"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/smd_text_color" />
+
+        <!-- Photo -->
+        <TextView
+            android:id="@+id/tabPhoto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Photo"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/smd_text_color" />
+
+        <!-- Video -->
+        <TextView
+            android:id="@+id/tabVideo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Video"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/smd_text_color" />
+    </LinearLayout>
+
+</LinearLayout>

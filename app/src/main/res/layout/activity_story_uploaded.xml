@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/black"
+    tools:context=".Story">
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+
+        <!-- Full picture -->
+        <ImageView
+            android:id="@+id/storyImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/pics5"
+            android:scaleType="centerCrop"
+            android:background="@drawable/rounded_corners12"
+            android:clipToOutline="true" />
+
+        <!-- Top Toolbar (Story Header) -->
+        <LinearLayout
+            android:id="@+id/topToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@android:color/transparent">
+
+            <!-- Progress Bar -->
+            <ProgressBar
+                android:id="@+id/storyProgress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:progress="70"
+                android:max="100"
+                android:progressDrawable="@android:drawable/progress_horizontal"
+                android:indeterminate="false"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Profile + Username + Close -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <!-- Profile Picture -->
+                <ImageView
+                    android:id="@+id/storyProfilePic"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/profile"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners12"
+                    android:clipToOutline="true"
+                    android:layout_alignParentStart="true" />
+
+                <!-- Username and Time -->
+                <LinearLayout
+                    android:id="@+id/usernameTimeLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/storyProfilePic"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/storyUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="gursky.studio"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/storyTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="11h"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Close Button -->
+                <ImageView
+                    android:id="@+id/btnClose"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/options"
+                    android:scaleType="centerInside"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+    <!-- Part 2: Smallest (Actions footer) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="12dp"
+        android:background="@android:color/black">
+
+        <!-- Create -->
+        <LinearLayout
+            android:id="@+id/actionCreate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iconCreate"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/reel"
+                android:background="@drawable/rounded_toolbar_icon_bg"
+                android:scaleType="centerInside" />
+
+
+        </LinearLayout>
+
+        <!-- Facebook -->
+        <LinearLayout
+            android:id="@+id/actionFacebook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iconFacebook"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/facebook"
+                android:background="@drawable/rounded_toolbar_icon_bg"
+                android:scaleType="centerInside" />
+
+
+        </LinearLayout>
+
+        <!-- Highlight -->
+        <LinearLayout
+            android:id="@+id/actionHighlight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iconHighlight"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/highlight"
+                android:background="@drawable/rounded_toolbar_icon_bg"
+                android:scaleType="centerInside" />
+
+
+        </LinearLayout>
+
+        <!-- More -->
+        <LinearLayout
+            android:id="@+id/actionMore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iconMore"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/more"
+                android:background="@drawable/rounded_toolbar_icon_bg"
+                android:scaleType="centerInside" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

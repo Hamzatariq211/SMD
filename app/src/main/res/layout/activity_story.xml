@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/black"
+    tools:context=".Story">
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+
+        <!-- Full picture -->
+        <ImageView
+            android:id="@+id/storyImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/pics5"
+            android:scaleType="centerCrop"
+            android:background="@drawable/rounded_corners12"
+            android:clipToOutline="true" />
+
+
+        <!-- Bottom control icons -->
+        <LinearLayout
+            android:id="@+id/bottomControls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="16dp"
+            android:background="@android:color/transparent">
+
+            <!-- Gallery Icon -->
+            <ImageView
+                android:id="@+id/iconGallery"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/gallery"
+                android:tint="@android:color/white"
+                android:layout_marginEnd="24dp" />
+
+            <!-- Flash Icon -->
+            <ImageView
+                android:id="@+id/iconFlash"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/flash"
+                android:tint="@android:color/white"
+                android:layout_marginEnd="24dp" />
+
+            <!-- Capture Button (Big White Circle) -->
+            <ImageView
+                android:id="@+id/btnCapture"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/circle12"
+                android:tint="@android:color/white"
+            android:layout_marginEnd="24dp" />
+
+            <!-- Switch Camera -->
+            <ImageView
+                android:id="@+id/iconSwitchCamera"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/switch_camera"
+                android:tint="@android:color/white"
+                android:layout_marginEnd="24dp" />
+
+            <!-- Smiley/Sticker -->
+            <ImageView
+                android:id="@+id/iconSticker"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/gif"
+                android:tint="@android:color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Part 2: Smallest -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+
+        android:padding="8dp">
+
+
+        <!-- Live -->
+        <TextView
+            android:id="@+id/texttype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/smd_text_color"
+            android:layout_marginEnd="32dp"/>
+
+
+        <!-- Live -->
+        <TextView
+            android:id="@+id/textLive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Live"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/smd_text_color"
+            android:layout_marginEnd="32dp"/>
+
+        <!-- Normal -->
+        <TextView
+            android:id="@+id/textNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Normal"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/smd_text_color"
+            android:layout_marginEnd="32dp"/>
+
+        <!-- Boomerang -->
+        <TextView
+            android:id="@+id/textBoomerang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Boomerang"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/smd_text_color"/>
+    </LinearLayout>
+
+
+</LinearLayout>

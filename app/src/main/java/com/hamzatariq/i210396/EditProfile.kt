@@ -1,18 +1,17 @@
 package com.hamzatariq.i210396
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class chat : AppCompatActivity() {
+class EditProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_chat)
+        setContentView(R.layout.activity_edit_profile)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -20,17 +19,17 @@ class chat : AppCompatActivity() {
             insets
         }
 
-        // 📌 Back icon click → go back
-        val backIcon = findViewById<ImageView>(R.id.backIcon)
-        backIcon.setOnClickListener {
-            finish()
+        // ✅ Cancel button
+        val btnCancel = findViewById<TextView>(R.id.btnCancel)
+        btnCancel.setOnClickListener {
+            finish()  // closes EditProfile and goes back
         }
 
-        // 📌 Video camera click → open CallActivity
-        val videoCamera = findViewById<ImageView>(R.id.videoCamera)
-        videoCamera.setOnClickListener {
-            val intent = Intent(this, call::class.java)
-            startActivity(intent)
+        // ✅ Done button
+        val btnDone = findViewById<TextView>(R.id.btnDone)
+        btnDone.setOnClickListener {
+            // You can also save changes here if needed
+            finish()  // just closes the activity
         }
     }
 }

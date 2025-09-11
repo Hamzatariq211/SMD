@@ -2,17 +2,18 @@ package com.hamzatariq.i210396
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class chat : AppCompatActivity() {
+class StoryUploaded : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_chat)
+        setContentView(R.layout.activity_story_uploaded)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -20,17 +21,11 @@ class chat : AppCompatActivity() {
             insets
         }
 
-        // 📌 Back icon click → go back
-        val backIcon = findViewById<ImageView>(R.id.backIcon)
-        backIcon.setOnClickListener {
-            finish()
-        }
-
-        // 📌 Video camera click → open CallActivity
-        val videoCamera = findViewById<ImageView>(R.id.videoCamera)
-        videoCamera.setOnClickListener {
-            val intent = Intent(this, call::class.java)
+        // ✅ Auto-move to HomePage after 4 seconds
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this, HomePage::class.java)
             startActivity(intent)
-        }
+            finish() // close StoryUploaded so user can't return here
+        }, 4000)
     }
 }

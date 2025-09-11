@@ -2,17 +2,17 @@ package com.hamzatariq.i210396
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class chat : AppCompatActivity() {
+class UploadStory : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_chat)
+        setContentView(R.layout.activity_upload_story)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -20,17 +20,12 @@ class chat : AppCompatActivity() {
             insets
         }
 
-        // 📌 Back icon click → go back
-        val backIcon = findViewById<ImageView>(R.id.backIcon)
-        backIcon.setOnClickListener {
-            finish()
-        }
-
-        // 📌 Video camera click → open CallActivity
-        val videoCamera = findViewById<ImageView>(R.id.videoCamera)
-        videoCamera.setOnClickListener {
-            val intent = Intent(this, call::class.java)
+        // ✅ "Your Story" button → Move to StoryUploaded
+        val yourStoryBtn = findViewById<LinearLayout>(R.id.btnYourStory)
+        yourStoryBtn.setOnClickListener {
+            val intent = Intent(this, StoryUploaded::class.java)
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
 }

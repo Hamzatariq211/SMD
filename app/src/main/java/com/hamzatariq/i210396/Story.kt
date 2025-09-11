@@ -8,11 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class chat : AppCompatActivity() {
+class Story : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_chat)
+        setContentView(R.layout.activity_story)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -20,17 +20,12 @@ class chat : AppCompatActivity() {
             insets
         }
 
-        // 📌 Back icon click → go back
-        val backIcon = findViewById<ImageView>(R.id.backIcon)
-        backIcon.setOnClickListener {
-            finish()
-        }
-
-        // 📌 Video camera click → open CallActivity
-        val videoCamera = findViewById<ImageView>(R.id.videoCamera)
-        videoCamera.setOnClickListener {
-            val intent = Intent(this, call::class.java)
+        // ✅ Capture button → Move to UploadStory
+        val captureBtn = findViewById<ImageView>(R.id.btnCapture)
+        captureBtn.setOnClickListener {
+            val intent = Intent(this, UploadStory::class.java)
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
 }

@@ -5,5 +5,9 @@
     <color name="smd_text_color">#8d3f3b</color>
     <color name="semi_transparent_black">#88000000</color> <!-- 50% opacity -->
 
+    <color name="light_orangish_red">#FF8A65</color>
+
+
+
 
 </resources>

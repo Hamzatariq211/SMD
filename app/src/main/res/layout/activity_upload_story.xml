@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/black"
+    tools:context=".Story">
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+
+        <!-- Full picture -->
+        <ImageView
+            android:id="@+id/storyImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/pics5"
+            android:scaleType="centerCrop"
+            android:background="@drawable/rounded_corners12"
+            android:clipToOutline="true" />
+
+        <!-- Top Toolbar -->
+        <LinearLayout
+            android:id="@+id/topToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:padding="8dp"
+            android:background="@android:color/transparent">
+
+
+
+            <!-- Partnership -->
+
+            <!-- Text -->
+            <ImageView
+                android:id="@+id/btnPartnership"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/rounded_toolbar_icon_bg"
+                android:scaleType="centerInside"
+                android:src="@drawable/partnership" />
+
+            <ImageView
+                android:id="@+id/btnText"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/text"
+                android:scaleType="centerInside"
+                android:background="@drawable/rounded_toolbar_icon_bg"
+                android:layout_margin="4dp" />
+
+            <!-- Stickers -->
+            <ImageView
+                android:id="@+id/btnStickers"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/stickers"
+                android:scaleType="centerInside"
+                android:background="@drawable/rounded_toolbar_icon_bg"
+                android:layout_margin="4dp" />
+
+            <!-- Music -->
+            <ImageView
+                android:id="@+id/btnMusic"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/music"
+                android:scaleType="centerInside"
+                android:background="@drawable/rounded_toolbar_icon_bg"
+                android:layout_margin="4dp" />
+
+            <!-- Filters -->
+            <ImageView
+                android:id="@+id/btnFilters"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/filters"
+                android:scaleType="centerInside"
+                android:background="@drawable/rounded_toolbar_icon_bg"
+                android:layout_margin="4dp" />
+
+
+            <!-- Close -->
+            <ImageView
+                android:id="@+id/btnClose"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/options"
+                android:scaleType="centerInside"
+                android:background="@drawable/rounded_toolbar_icon_bg"
+                android:layout_margin="4dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Part 2: Smallest -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="12dp"
+        android:background="@android:color/black">
+
+        <!-- Your Story -->
+        <LinearLayout
+            android:id="@+id/btnYourStory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:background="@drawable/rounded_bg">
+
+            <ImageView
+                android:id="@+id/iconProfile"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/profile"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your story"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Close Friends -->
+        <LinearLayout
+            android:id="@+id/btnCloseFriends"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/rounded_bg">
+
+            <ImageView
+                android:id="@+id/iconStar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/star"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Close friends"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Send Arrow -->
+        <LinearLayout
+            android:id="@+id/btnSend"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/rounded_bg">
+
+            <ImageView
+                android:id="@+id/iconArrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/arrow"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>
