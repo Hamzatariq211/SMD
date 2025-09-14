@@ -145,7 +145,7 @@
                         android:id="@+id/username1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="joshua_l"
+                        android:text="johnny_super"
                         android:textStyle="bold"
                         android:textSize="15sp" />
 

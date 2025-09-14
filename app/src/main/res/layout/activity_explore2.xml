@@ -216,8 +216,47 @@
             </LinearLayout>
 
             <!-- Repeat more rows as needed -->
+            <LinearLayout
+                android:id="@+id/otheruser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/david"
+                    android:background="@drawable/circle_bg"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:clipToOutline="true" />
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="David"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
+
+
+
+
+
     </RelativeLayout>
 
 

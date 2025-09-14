@@ -44,7 +44,7 @@ class SwitchAccounts : AppCompatActivity() {
         // Set click listener for the back button
         ivBack.setOnClickListener {
             // Create intent to navigate to LoginScreen
-            val intent = Intent(this, loginscreen::class.java)
+            val intent = Intent(this, loginUser::class.java)
             startActivity(intent)
 
             // Optional: finish current activity
@@ -54,7 +54,7 @@ class SwitchAccounts : AppCompatActivity() {
         // Set click listener for the sign up link
         tvSignUpLink.setOnClickListener {
             // Create intent to navigate to RegisterScreen
-            val intent = Intent(this, RegisterScreen::class.java)
+            val intent = Intent(this, RegisterUser::class.java)
             startActivity(intent)
 
             // Optional: finish current activity if you don't want user to come back

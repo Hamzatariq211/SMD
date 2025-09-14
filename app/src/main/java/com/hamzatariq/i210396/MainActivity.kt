@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         // Move to LoginScreen after 2 seconds
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, loginscreen::class.java)
+            val intent = Intent(this, loginUser::class.java)
             startActivity(intent)
             finish() // Optional: prevents back navigation to splash
         }, 2000) // 2000ms = 2 seconds

@@ -1,5 +1,6 @@
 package com.hamzatariq.i210396
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
@@ -7,11 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class call : AppCompatActivity() {
+class chatScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_call)
+        setContentView(R.layout.activity_chat)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -19,10 +20,17 @@ class call : AppCompatActivity() {
             insets
         }
 
-        // ✅ End Call button click
-        val endCallButton = findViewById<ImageView>(R.id.ivEndCall)
-        endCallButton.setOnClickListener {
-            finish() // closes current activity and goes back
+        // 📌 Back icon click → go back
+        val backIcon = findViewById<ImageView>(R.id.backIcon)
+        backIcon.setOnClickListener {
+            finish()
+        }
+
+        // 📌 Video camera click → open CallActivity
+        val videoCamera = findViewById<ImageView>(R.id.videoCamera)
+        videoCamera.setOnClickListener {
+            val intent = Intent(this, callScreen::class.java)
+            startActivity(intent)
         }
     }
 }

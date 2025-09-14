@@ -4,6 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".SwitchAccounts">
 
     <!-- Back Button (Top Left) -->
@@ -38,11 +39,12 @@
         android:hint="Username"
         android:inputType="textPersonName"
         android:padding="12dp"
-        android:background="@android:drawable/edit_text"
+        android:background="@drawable/rounded_username"
         android:layout_below="@id/tvLogo"
         android:layout_marginTop="48dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"/>
+
 
     <!-- Password Field -->
     <EditText
@@ -52,7 +54,7 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:padding="12dp"
-        android:background="@android:drawable/edit_text"
+        android:background="@drawable/rounded_username"
         android:layout_below="@id/etUsername"
         android:layout_marginTop="16dp"
         android:layout_marginStart="32dp"

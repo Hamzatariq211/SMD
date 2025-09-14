@@ -13,67 +13,76 @@
         android:theme="@style/Theme.I210396"
         tools:targetApi="31">
         <activity
-            android:name=".StoryUploaded"
-            android:exported="true" />
-
-        <activity
-            android:name=".UploadStory"
+            android:name=".SociallyOtherUser"
             android:exported="true"/>
 
+        <activity
+            android:name=".StoryUploaded"
+            android:exported="true" />
+        <activity
+            android:name=".UploadStory"
+            android:exported="true" />
         <activity
             android:name=".Story"
             android:exported="true" />
         <activity
-            android:name=".AddPost"
+            android:name=".AddPostScreen"
             android:exported="true" />
         <activity
             android:name=".EditProfile"
             android:exported="true" />
         <activity
-            android:name=".profile"
+            android:name=".profileScreen"
             android:exported="true" />
         <activity
-            android:name=".likelike"
+            android:name=".likelikePage"
             android:exported="false" />
         <activity
             android:name=".likeFollowing"
             android:exported="true" />
         <activity
-            android:name=".call"
-            android:exported="false" />
+            android:name=".callScreen"
+            android:exported="true"/>
+
         <activity
-            android:name=".chat"
+            android:name=".chatScreen"
             android:exported="true" />
         <activity
-            android:name=".dm"
+            android:name=".Messages"
             android:exported="true" />
         <activity
-            android:name=".Explore2"
-            android:exported="false" />
+            android:name=".ExploreSearch"
+            android:exported="true"/>
+
         <activity
             android:name=".Explore"
-            android:exported="true" />
+            android:exported="true"/>
+
         <activity
             android:name=".SwitchAccounts"
-            android:exported="true" />
+            android:exported="true"/>
+
+
         <activity
             android:name=".HomePage"
-            android:exported="true" >
+            android:exported="true" />
+        <activity
+            android:name=".RegisterUser"
+            android:exported="false" />
+        <activity
+            android:name=".loginUser"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".RegisterScreen"
-            android:exported="false" />
-        <activity
-            android:name=".loginscreen"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+
+
     </application>
 
 </manifest>

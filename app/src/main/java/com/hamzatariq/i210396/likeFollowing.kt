@@ -34,19 +34,19 @@ class likeFollowing : AppCompatActivity() {
 
         // Like like
         findViewById<View>(R.id.like12).setOnClickListener {
-            startActivity(Intent(this, likelike::class.java))
+            startActivity(Intent(this, likelikePage::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
         // ✅ Profile
         findViewById<View>(R.id.profile).setOnClickListener {
-            startActivity(Intent(this, profile::class.java))
+            startActivity(Intent(this, profileScreen::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
         // ✅ Post
         findViewById<View>(R.id.post).setOnClickListener {
-            startActivity(Intent(this, AddPost::class.java))
+            startActivity(Intent(this, AddPostScreen::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }

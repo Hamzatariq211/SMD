@@ -26,7 +26,7 @@ class Explore : AppCompatActivity() {
         // Reference to search EditText
         val searchEditText = findViewById<EditText>(R.id.searchEditText)
         searchEditText.setOnClickListener {
-            val intent = Intent(this, Explore2::class.java)
+            val intent = Intent(this, ExploreSearch::class.java)
             startActivity(intent)
         }
 
@@ -47,14 +47,14 @@ class Explore : AppCompatActivity() {
         // ✅ Reference to profile ImageView
         val profileIcon = findViewById<ImageView>(R.id.profile)
         profileIcon.setOnClickListener {
-            val intent = Intent(this, profile::class.java)
+            val intent = Intent(this, profileScreen::class.java)
             startActivity(intent)
         }
 
         // ✅ Reference to post ImageView
         val postIcon = findViewById<ImageView>(R.id.post)
         postIcon.setOnClickListener {
-            val intent = Intent(this, AddPost::class.java) // opens AddPost activity
+            val intent = Intent(this, AddPostScreen::class.java) // opens AddPost activity
             startActivity(intent)
         }
     }

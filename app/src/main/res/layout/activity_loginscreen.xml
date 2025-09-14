@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFFFFF"
-    tools:context=".loginscreen">
+    tools:context=".loginUser">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,9 +30,10 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="24dp"
-            android:background="@drawable/circle_placeholder"
+            android:background="@drawable/profile"
             android:scaleType="centerCrop"
             android:contentDescription="Profile Picture"
+
             android:clipToOutline="true" />
 
         <!-- Sample text for user name -->
@@ -41,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Jacob_w"
+            android:text="alex_w"
             android:textSize="13sp"
             android:textStyle="bold"
             android:textColor="@color/black"

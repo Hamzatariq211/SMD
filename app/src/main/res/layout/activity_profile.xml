@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".profile">
+    android:background="@android:color/white"
+    tools:context=".profileScreen">
 
     <!-- Part 1 -->
     <RelativeLayout
@@ -22,7 +23,7 @@
             android:id="@+id/tvNatasha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="natasha_w"
+            android:text="alex_w"
             android:textSize="18sp"
             android:textColor="@color/smd_text_color"
             android:textStyle="bold"
@@ -180,7 +181,7 @@
             android:id="@+id/nameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Natasha West"
+            android:text="Alex West"
             android:textStyle="bold"
             android:textSize="14sp"
             android:textColor="@android:color/black"
@@ -256,15 +257,16 @@
             android:textColor="@android:color/black"
             android:layout_alignParentTop="true"/>
 
-        <!-- Highlights Row -->
+        <!-- Highlights Row (left-attached) -->
         <LinearLayout
             android:id="@+id/highlightsRow"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:layout_below="@id/editProfileBtn"
-            android:layout_marginTop="12dp">
+            android:layout_marginTop="12dp"
+            android:layout_alignParentStart="true">
 
             <!-- New (Plus) -->
             <LinearLayout

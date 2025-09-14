@@ -32,7 +32,7 @@ class HomePage : AppCompatActivity() {
         // Share (DM)
         val shareIcon = findViewById<ImageView>(R.id.share)
         shareIcon.setOnClickListener {
-            val intent = Intent(this, dm::class.java)
+            val intent = Intent(this, Messages::class.java)
             startActivity(intent)
         }
 
@@ -46,14 +46,14 @@ class HomePage : AppCompatActivity() {
         // Profile
         val profileIcon = findViewById<ImageView>(R.id.profile)
         profileIcon.setOnClickListener {
-            val intent = Intent(this, profile::class.java)
+            val intent = Intent(this, profileScreen::class.java)
             startActivity(intent)
         }
 
         // Post
         val postIcon = findViewById<ImageView>(R.id.post)
         postIcon.setOnClickListener {
-            val intent = Intent(this, AddPost::class.java)
+            val intent = Intent(this, AddPostScreen::class.java)
             startActivity(intent)
         }
 

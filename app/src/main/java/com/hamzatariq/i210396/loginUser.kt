@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class loginscreen : AppCompatActivity() {
+class loginUser : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,7 +24,7 @@ class loginscreen : AppCompatActivity() {
         // Sign Up text navigation
         val tvSignUp = findViewById<TextView>(R.id.tvSignUp)
         tvSignUp.setOnClickListener {
-            val intent = Intent(this, RegisterScreen::class.java)
+            val intent = Intent(this, RegisterUser::class.java)
             startActivity(intent)
         }
 

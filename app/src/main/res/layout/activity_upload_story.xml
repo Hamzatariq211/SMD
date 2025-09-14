@@ -22,7 +22,7 @@
             android:id="@+id/storyImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/pics5"
+            android:src="@drawable/pic1"
             android:scaleType="centerCrop"
             android:background="@drawable/rounded_corners12"
             android:clipToOutline="true" />

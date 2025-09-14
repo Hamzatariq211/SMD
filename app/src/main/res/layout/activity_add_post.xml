@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@android:color/white"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".AddPost">
+    tools:context=".AddPostScreen">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -129,8 +129,8 @@
                     android:textColor="@android:color/white" />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
+ </LinearLayout>
 
 
 

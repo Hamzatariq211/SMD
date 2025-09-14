@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class dm : AppCompatActivity() {
+class Messages : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,7 +33,7 @@ class dm : AppCompatActivity() {
         // Open chat when clicking on the row
         val openChatRow = findViewById<RelativeLayout>(R.id.openchat)
         openChatRow.setOnClickListener {
-            val intent = Intent(this, chat::class.java) // Replace Chat::class.java with your chat activity
+            val intent = Intent(this, chatScreen::class.java) // Replace Chat::class.java with your chat activity
             startActivity(intent)
         }
     }

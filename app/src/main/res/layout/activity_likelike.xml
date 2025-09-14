@@ -4,6 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical"
     tools:context=".likeFollowing">
 
@@ -505,7 +506,7 @@
 
 
 
-    <!-- Activity item: two PFPS + text + small post preview -->
+    <!-- Activity item: single avatar + text + Follow button -->
     <RelativeLayout
         android:id="@+id/part5"
         android:layout_width="match_parent"
@@ -517,63 +518,49 @@
         android:paddingBottom="8dp"
         android:background="@android:color/white">
 
-        <!-- Right: small post preview (change src to your post image, e.g., pics9) -->
-        <ImageView
-            android:id="@+id/postPreview"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:src="@drawable/pics1"
-            android:scaleType="centerCrop"
+        <!-- Right: Follow button -->
+        <TextView
+            android:id="@+id/btnFollow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Follow"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_follow_btn"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true" />
 
-        <!-- Left: overlapped profile pictures -->
-        <RelativeLayout
-            android:id="@+id/avatarStack"
-            android:layout_width="56dp"
+        <!-- Left: single circular avatar -->
+        <ImageView
+            android:id="@+id/pfp5Img"
+            android:layout_width="40dp"
             android:layout_height="40dp"
+            android:src="@drawable/pfp5"
+            android:scaleType="centerCrop"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            android:background="@drawable/circlemask"
+            android:clipToOutline="true"
+            android:contentDescription="Profile picture" />
 
-            <!-- Back avatar -->
-            <ImageView
-                android:id="@+id/pfp4Img"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/pfp4"
-                android:scaleType="centerCrop"
-                android:background="@drawable/circlemask"
-                android:clipToOutline="true" />
-
-            <!-- Front avatar (slightly shifted right to overlap) -->
-            <ImageView
-                android:id="@+id/pfp5Img"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="24dp"
-                android:src="@drawable/pfp5"
-                android:scaleType="centerCrop"
-                android:background="@drawable/circlemask"
-                android:clipToOutline="true" />
-        </RelativeLayout>
-
-        <!-- Center: text block (to the right of avatars, to the left of preview) -->
+        <!-- Center: username + action + time -->
         <LinearLayout
             android:id="@+id/textBlock"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_toEndOf="@id/avatarStack"
-            android:layout_toStartOf="@id/postPreview"
             android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp">
+            android:layout_toEndOf="@id/pfp5Img"
+            android:layout_toStartOf="@id/btnFollow"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp">
 
-            <!-- Line 1: maxjacobson and zackjohn liked -->
+            <!-- Line 1: <bold>username</bold> started following you. -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -581,44 +568,7 @@
                 android:baselineAligned="true">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="maxjacobson "
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="and "
-                    android:textSize="15sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="zackjohn "
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="liked"
-                    android:textSize="15sp"
-                    android:textColor="#000000" />
-            </LinearLayout>
-
-            <!-- Line 2: mis_potter’s post. 3h -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="true">
-
-                <TextView
+                    android:id="@+id/tvUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="mis_potter"
@@ -627,26 +577,22 @@
                     android:textColor="#000000" />
 
                 <TextView
+                    android:id="@+id/tvAction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="’s post"
+                    android:text=" started following you."
                     android:textSize="15sp"
                     android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="  ·  "
-                    android:textSize="14sp"
-                    android:textColor="#888888" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3h"
-                    android:textSize="14sp"
-                    android:textColor="#888888" />
             </LinearLayout>
+
+            <!-- Line 2: time (e.g., 3d) -->
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3d"
+                android:textSize="13sp"
+                android:textColor="#888888" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -669,8 +615,8 @@
 
 
 
-    <!-- Part 7 -->
-    <!-- Activity item: two PFPS (pfp6 + pfp7) + text + small post preview -->
+
+    <!-- Part 7: single avatar + text + Message button -->
     <RelativeLayout
         android:id="@+id/part6"
         android:layout_width="match_parent"
@@ -682,63 +628,49 @@
         android:paddingBottom="8dp"
         android:background="@android:color/white">
 
-        <!-- Right: small post preview -->
-        <ImageView
-            android:id="@+id/postPreview2"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:src="@drawable/pics4"
-            android:scaleType="centerCrop"
+        <!-- Right: Message button (outlined) -->
+        <TextView
+            android:id="@+id/btnMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="#444444"
+            android:background="@drawable/bg_message_btn"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true" />
 
-        <!-- Left: overlapped profile pictures -->
-        <RelativeLayout
-            android:id="@+id/avatarStack2"
-            android:layout_width="56dp"
+        <!-- Left: single circular avatar -->
+        <ImageView
+            android:id="@+id/pfp6Img"
+            android:layout_width="40dp"
             android:layout_height="40dp"
+            android:src="@drawable/pfp2"
+            android:scaleType="centerCrop"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            android:background="@drawable/circlemask"
+            android:clipToOutline="true"
+            android:contentDescription="Profile picture" />
 
-            <!-- Back avatar -->
-            <ImageView
-                android:id="@+id/pfp6Img"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/pfp6"
-                android:scaleType="centerCrop"
-                android:background="@drawable/circlemask"
-                android:clipToOutline="true" />
-
-            <!-- Front avatar -->
-            <ImageView
-                android:id="@+id/pfp7Img"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="24dp"
-                android:src="@drawable/pfp7"
-                android:scaleType="centerCrop"
-                android:background="@drawable/circlemask"
-                android:clipToOutline="true" />
-        </RelativeLayout>
-
-        <!-- Center: text block -->
+        <!-- Center: username + action + time -->
         <LinearLayout
             android:id="@+id/textBlock2"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_toEndOf="@id/avatarStack2"
-            android:layout_toStartOf="@id/postPreview2"
             android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp">
+            android:layout_toEndOf="@id/pfp6Img"
+            android:layout_toStartOf="@id/btnMessage"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp">
 
-            <!-- Line 1: usernames + liked -->
+            <!-- Line 1: <bold>username</bold> started following you. -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -746,74 +678,34 @@
                 android:baselineAligned="true">
 
                 <TextView
+                    android:id="@+id/tvUsername2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="sarah_lee "
+                    android:text="martini_rond"
                     android:textStyle="bold"
                     android:textSize="15sp"
                     android:textColor="#000000" />
 
                 <TextView
+                    android:id="@+id/tvAction2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="and "
-                    android:textSize="15sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="david_k "
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="liked"
+                    android:text=" started following you."
                     android:textSize="15sp"
                     android:textColor="#000000" />
             </LinearLayout>
 
-            <!-- Line 2: target post + time -->
-            <LinearLayout
+            <!-- Line 2: time -->
+            <TextView
+                android:id="@+id/tvTime2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="true">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="emily_w "
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="’s post"
-                    android:textSize="15sp"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="  ·  "
-                    android:textSize="14sp"
-                    android:textColor="#888888" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4h"
-                    android:textSize="14sp"
-                    android:textColor="#888888" />
-            </LinearLayout>
+                android:text="3d"
+                android:textSize="13sp"
+                android:textColor="#888888" />
         </LinearLayout>
     </RelativeLayout>
+
 
 
 

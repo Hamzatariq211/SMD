@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class likelike : AppCompatActivity() {
+class likelikePage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,13 +23,13 @@ class likelike : AppCompatActivity() {
 
         // ✅ Profile
         findViewById<View>(R.id.profile).setOnClickListener {
-            startActivity(Intent(this, profile::class.java))
+            startActivity(Intent(this, profileScreen::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
         // ✅ Post
         findViewById<View>(R.id.post).setOnClickListener {
-            startActivity(Intent(this, AddPost::class.java))
+            startActivity(Intent(this, AddPostScreen::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
