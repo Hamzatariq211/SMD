@@ -63,16 +63,36 @@
 
 
         <!-- SECOND PART -->
-        <ImageView
-            android:id="@+id/ivProfile"
+        <FrameLayout
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@android:drawable/ic_menu_camera"
-            android:scaleType="centerCrop"
-            android:background="@drawable/circle_bg"
-            android:padding="2dp"
-            android:contentDescription="Profile Picture"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@android:drawable/ic_menu_camera"
+                android:scaleType="centerCrop"
+                android:background="@drawable/circle_bg"
+                android:padding="2dp"
+                android:contentDescription="Profile Picture"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Camera overlay icon -->
+            <ImageView
+                android:id="@+id/ivCameraOverlay"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="4dp"
+                android:src="@android:drawable/ic_menu_camera"
+                android:background="@drawable/circle_white_bg"
+                android:padding="4dp"
+                android:contentDescription="Add Photo" />
+
+        </FrameLayout>
 
 
 

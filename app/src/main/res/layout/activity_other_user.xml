@@ -695,43 +695,13 @@
 
 
 
-    <!-- Part 9: Three images side by side -->
-    <LinearLayout
+    <!-- Part 9: Posts Grid (RecyclerView) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/posted_pictures"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:background="@android:color/white">
-
-        <!-- Image 1 -->
-        <ImageView
-            android:id="@+id/pic14"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-
-            android:src="@drawable/pic14"
-            android:scaleType="centerCrop" />
-
-        <!-- Image 2 -->
-        <ImageView
-            android:id="@+id/pic15"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/pic15"
-            android:scaleType="centerCrop" />
-
-        <!-- Image 3 -->
-        <ImageView
-            android:id="@+id/pic16"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/pic16"
-            android:scaleType="centerCrop" />
-
-    </LinearLayout>
+        android:background="@android:color/white" />
 
 
 

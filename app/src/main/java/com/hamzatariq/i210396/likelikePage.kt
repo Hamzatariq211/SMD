@@ -3,13 +3,20 @@ package com.hamzatariq.i210396
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.hamzatariq.i210396.utils.ImageUtils
 
 class likelikePage : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,40 +28,56 @@ class likelikePage : AppCompatActivity() {
             insets
         }
 
-        // ✅ Profile
-        findViewById<View>(R.id.profile).setOnClickListener {
-            startActivity(Intent(this, profileScreen::class.java))
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-        }
+        // Initialize Firebase
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
-        // ✅ Post
-        findViewById<View>(R.id.post).setOnClickListener {
-            startActivity(Intent(this, AddPostScreen::class.java))
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-        }
+        // Load user profile picture
+        loadUserProfilePicture()
 
-        // HomePage
-        val homeBtn = findViewById<View>(R.id.home)
-        homeBtn.setOnClickListener {
-            val intent = Intent(this, HomePage::class.java)
-            startActivity(intent)
+        // Home
+        findViewById<View>(R.id.home)?.setOnClickListener {
+            startActivity(Intent(this, HomePage::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
         // Explore
-        val exploreBtn = findViewById<View>(R.id.explore)
-        exploreBtn.setOnClickListener {
-            val intent = Intent(this, Explore::class.java)
-            startActivity(intent)
+        findViewById<View>(R.id.explore)?.setOnClickListener {
+            startActivity(Intent(this, Explore::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
-        // LikeFollowing
-        val followingBtn = findViewById<LinearLayout>(R.id.following)
-        followingBtn.setOnClickListener {
-            val intent = Intent(this, likeFollowing::class.java)
-            startActivity(intent)
+        // Following
+        findViewById<LinearLayout>(R.id.following)?.setOnClickListener {
+            startActivity(Intent(this, likeFollowing::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
+
+        // Profile
+        findViewById<View>(R.id.profile)?.setOnClickListener {
+            startActivity(Intent(this, profileScreen::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
+
+        // Post
+        findViewById<View>(R.id.post)?.setOnClickListener {
+            startActivity(Intent(this, AddPostScreen::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
+
+    private fun loadUserProfilePicture() {
+        val currentUser = auth.currentUser ?: return
+
+        firestore.collection("users").document(currentUser.uid)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val profileImageBase64 = document.getString("profileImageUrl") ?: ""
+                    val profileNavIcon = findViewById<ImageView>(R.id.profile)
+                    ImageUtils.loadBase64Image(profileNavIcon, profileImageBase64)
+                }
+            }
+    }
 }
+

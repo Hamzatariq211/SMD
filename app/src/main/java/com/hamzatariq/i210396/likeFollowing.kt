@@ -3,12 +3,19 @@ package com.hamzatariq.i210396
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.hamzatariq.i210396.utils.ImageUtils
 
 class likeFollowing : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -19,6 +26,13 @@ class likeFollowing : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // Initialize Firebase
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
+
+        // Load user profile picture
+        loadUserProfilePicture()
 
         // Home
         findViewById<View>(R.id.home).setOnClickListener {
@@ -49,5 +63,19 @@ class likeFollowing : AppCompatActivity() {
             startActivity(Intent(this, AddPostScreen::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
+    }
+
+    private fun loadUserProfilePicture() {
+        val currentUser = auth.currentUser ?: return
+
+        firestore.collection("users").document(currentUser.uid)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val profileImageBase64 = document.getString("profileImageUrl") ?: ""
+                    val profileNavIcon = findViewById<ImageView>(R.id.profile)
+                    ImageUtils.loadBase64Image(profileNavIcon, profileImageBase64)
+                }
+            }
     }
 }

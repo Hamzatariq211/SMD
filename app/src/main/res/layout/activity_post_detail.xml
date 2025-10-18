@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Top Bar -->
+        <RelativeLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:padding="16dp"
+            android:background="@android:color/white"
+            android:elevation="4dp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/back"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="Back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Post"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:id="@+id/btnOptions"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/options"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="Options" />
+        </RelativeLayout>
+
+        <!-- Post Header (User Info) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/userProfileImage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/profile"
+                android:background="@drawable/circle_mask"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:contentDescription="Profile" />
+
+            <TextView
+                android:id="@+id/usernameText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:text="Username"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+            <ImageView
+                android:id="@+id/btnFollow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/more"
+                android:contentDescription="More" />
+        </LinearLayout>
+
+        <!-- Post Image -->
+        <ImageView
+            android:id="@+id/postImage"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:scaleType="centerCrop"
+            android:background="#f0f0f0"
+            android:contentDescription="Post Image" />
+
+        <!-- Action Buttons (Like, Comment, Share, Save) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/btnLike"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/like"
+                android:contentDescription="Like"
+                android:layout_marginEnd="16dp"/>
+
+            <ImageView
+                android:id="@+id/btnComment"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/comment"
+                android:contentDescription="Comment"
+                android:layout_marginEnd="16dp"/>
+
+            <ImageView
+                android:id="@+id/btnShare"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/share"
+                android:contentDescription="Share"
+                android:layout_marginEnd="16dp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/btnSave"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/save"
+                android:contentDescription="Save"/>
+        </LinearLayout>
+
+        <!-- Likes Count -->
+        <TextView
+            android:id="@+id/likesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 likes"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="4dp"/>
+
+        <!-- Caption -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="4dp">
+
+            <TextView
+                android:id="@+id/captionUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="username"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginEnd="4dp"/>
+
+            <TextView
+                android:id="@+id/captionText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Caption text here..."
+                android:textSize="14sp"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+
+        <!-- View All Comments -->
+        <TextView
+            android:id="@+id/viewAllComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View all 0 comments"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="4dp"/>
+
+        <!-- Timestamp -->
+        <TextView
+            android:id="@+id/timestampText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 hours ago"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"/>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e0e0e0"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Comments Section Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comments"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:padding="12dp"/>
+
+        <!-- Comments RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/commentsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:nestedScrollingEnabled="false"/>
+
+        <!-- Add Comment Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:background="@android:color/white"
+            android:elevation="4dp">
+
+            <ImageView
+                android:id="@+id/currentUserProfileImage"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/profile"
+                android:background="@drawable/circle_mask"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:contentDescription="Your Profile" />
+
+            <EditText
+                android:id="@+id/commentInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:hint="Add a comment..."
+                android:background="@drawable/rounded_edittext"
+                android:padding="10dp"
+                android:maxLines="3"/>
+
+            <TextView
+                android:id="@+id/btnPostComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Post"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#3897f0"
+                android:padding="8dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+

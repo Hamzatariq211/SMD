@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="natasha_w"
+            android:text=""
             android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center"
@@ -107,143 +107,14 @@
         android:layout_weight="6"
         android:background="@android:color/white">
 
-        <LinearLayout
-            android:id="@+id/dmList"
+        <!-- RecyclerView for chat list -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:clipToPadding="false"
+            android:padding="8dp" />
 
-            <!-- Row 1 -->
-            <RelativeLayout
-                android:id="@+id/openchat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp">
-
-                <!-- Profile image -->
-                <ImageView
-                    android:id="@+id/dm1"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/dm1"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/circlemask2"
-                    android:clipToOutline="true"/>
-
-
-                <!-- Username + message -->
-                <LinearLayout
-                    android:id="@+id/textContainer1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_toEndOf="@id/dm1"
-                    android:layout_marginStart="12dp">
-
-                    <TextView
-                        android:id="@+id/username1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="johnny_super"
-                        android:textStyle="bold"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/message1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Have a nice day, bro!"
-                        android:textSize="14sp"
-                        android:textColor="#777" />
-                </LinearLayout>
-
-                <!-- Time -->
-                <TextView
-                    android:id="@+id/time1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="· now"
-                    android:textSize="12sp"
-                    android:textColor="#999"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignTop="@id/username1" />
-
-                <!-- Camera icon -->
-                <ImageView
-                    android:id="@+id/cam1"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/camera"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/time1"
-                    android:layout_marginTop="4dp" />
-            </RelativeLayout>
-
-            <!-- Row 2 (copy and edit) -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp">
-
-                <ImageView
-                    android:id="@+id/dm2"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/dm2"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/circlemask2"
-                    android:clipToOutline="true" />
-
-
-                <LinearLayout
-                    android:id="@+id/textContainer2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_toEndOf="@id/dm2"
-                    android:layout_marginStart="12dp">
-
-                    <TextView
-                        android:id="@+id/username2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="karennne"
-                        android:textStyle="bold"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/message2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="I heard this is a good movie..."
-                        android:textSize="14sp"
-                        android:textColor="#777" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/time2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="· now"
-                    android:textSize="12sp"
-                    android:textColor="#999"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignTop="@id/username2" />
-
-                <ImageView
-                    android:id="@+id/cam2"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/camera"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/time2"
-                    android:layout_marginTop="4dp" />
-            </RelativeLayout>
-
-
-
-        </LinearLayout>
     </RelativeLayout>
 
 

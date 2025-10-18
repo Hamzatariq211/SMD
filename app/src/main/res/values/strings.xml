@@ -6,6 +6,8 @@
 
 
 
-</string>
-
+    </string>
+    <string name="follow">Follow</string>
+    <string name="following">Following</string>
+    <string name="request_sent">Requested</string>
 </resources>

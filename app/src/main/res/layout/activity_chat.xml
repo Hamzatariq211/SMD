@@ -44,16 +44,30 @@
                 android:background="@drawable/circlemask2"
                 android:clipToOutline="true"/>
 
-            <!-- Username -->
-            <TextView
-                android:id="@+id/username"
+            <!-- Username and Status -->
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Johnny"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_marginStart="8dp"/>
+                android:orientation="vertical"
+                android:layout_marginStart="8dp">
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Johnny"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/statusText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Online"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+            </LinearLayout>
 
             <!-- Video camera icon -->
             <ImageView
@@ -103,6 +117,15 @@
         android:layout_weight="10"
         android:orientation="vertical"
         >
+
+        <!-- Part 2: Very Large - Messages RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messagesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:clipToPadding="false"
+            android:padding="8dp" />
     </LinearLayout>
 
 
@@ -187,19 +210,14 @@
             android:paddingEnd="8dp">
 
             <!-- Camera (left) -->
-            <FrameLayout
+            <ImageView
+                android:id="@+id/btnCamera"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
-
-                android:layout_marginEnd="8dp">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/camera"
-                    android:contentDescription="@string/app_name"/>
-            </FrameLayout>
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/camera"
+                android:scaleType="centerInside"
+                android:contentDescription="Camera" />
 
             <!-- Text input (placeholder only) -->
             <EditText

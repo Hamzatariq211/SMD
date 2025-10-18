@@ -8,12 +8,12 @@
     android:background="@android:color/white"
     tools:context=".HomePage">
 
+    <!-- Header with Camera, Title, and Icons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
-
 
         <!-- Camera -->
         <ImageView
@@ -26,8 +26,6 @@
             android:padding="8dp"
             android:contentDescription="Camera" />
 
-
-
         <!-- Socially (Text instead of image) -->
         <TextView
             android:layout_width="0dp"
@@ -39,7 +37,6 @@
             android:textStyle="bold"
             android:textColor="@color/smd_text_color"
             android:fontFamily="@font/rebelton" />
-
 
         <!-- IGTV -->
         <ImageView
@@ -59,40 +56,24 @@
             android:src="@drawable/share"
             android:scaleType="centerInside"
             android:contentDescription="Share" />
-
     </LinearLayout>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Insta Stories Row (4 fixed stories) -->
+    <!-- Stories Row -->
     <LinearLayout
+        android:id="@+id/stories"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:padding="8dp">
 
+        <!-- Your Story (Add Story Button) -->
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginEnd="8dp"
             android:gravity="center">
 
-            <!-- Outer ring with inner photo -->
             <LinearLayout
                 android:id="@+id/story_container"
                 android:layout_width="70dp"
@@ -102,27 +83,25 @@
 
                 <ImageView
                     android:id="@+id/story_image"
-                    android:layout_width="70dp"
-                    android:layout_height="56dp"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:background="@drawable/circle_mask"
                     android:clipToOutline="true"
-                    android:contentDescription="Story"
+                    android:contentDescription="Your Story"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profile" />
             </LinearLayout>
 
-            <!-- + sign (bottom right of story circle) -->
             <ImageView
                 android:id="@+id/add_story_icon"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_add"
-            android:background="@drawable/circle_mask"
-            android:layout_alignBottom="@id/story_container"
-            android:layout_alignEnd="@id/story_container"
-            android:layout_margin="2dp"/>
+                android:background="@drawable/circle_mask"
+                android:layout_alignBottom="@id/story_container"
+                android:layout_alignEnd="@id/story_container"
+                android:layout_margin="2dp"/>
 
-            <!-- Username (below story circle) -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,388 +113,24 @@
                 android:layout_marginTop="4dp"/>
         </RelativeLayout>
 
-
-
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginHorizontal="15dp">
-
-
-        <!-- Outer ring -->
-            <LinearLayout
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:gravity="center"
-                android:background="@drawable/story_ring">
-
-                <!-- Inner photo -->
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/person1"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/circle_mask"
-                    android:clipToOutline="true"
-                    android:contentDescription="Story" />
-            </LinearLayout>
-
-            <!-- Username -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alina"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
-                android:layout_marginTop="4dp"/>
-        </LinearLayout>
-
-
-
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginHorizontal="15dp">
-
-        <!-- Outer ring -->
-            <LinearLayout
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:gravity="center"
-                android:background="@drawable/story_ring">
-
-                <!-- Inner photo -->
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/person2"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/circle_mask"
-                    android:clipToOutline="true"
-                    android:contentDescription="Story" />
-            </LinearLayout>
-
-            <!-- Username -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="David"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
-                android:layout_marginTop="4dp"/>
-        </LinearLayout>
-
-
-
-
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginHorizontal="15dp">
-
-
-        <!-- Outer ring -->
-            <LinearLayout
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:gravity="center"
-                android:background="@drawable/story_ring">
-
-                <!-- Inner photo -->
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/person3"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/circle_mask"
-                    android:clipToOutline="true"
-                    android:contentDescription="Story" />
-            </LinearLayout>
-
-            <!-- Username -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Max"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
-                android:layout_marginTop="4dp"/>
-        </LinearLayout>
-
+        <!-- RecyclerView for dynamic stories -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/storiesRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal" />
     </LinearLayout>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Part 3 (small) -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-        <!-- Profile Picture -->
-        <ImageView
-            android:id="@+id/profile_pic"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/person1"
-            android:scaleType="centerCrop"
-            android:background="@drawable/circle_mask"
-            android:clipToOutline="true"
-            android:layout_alignParentStart="true"
-            android:contentDescription="Profile Picture" />
-
-        <!-- Username -->
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="alina_life"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:textColor="@android:color/black"
-            android:layout_toEndOf="@id/profile_pic"
-            android:layout_marginStart="10dp"
-            android:layout_alignTop="@id/profile_pic"/>
-
-        <!-- Location -->
-        <TextView
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tokyo, Japan"
-            android:textSize="12sp"
-            android:textColor="@android:color/darker_gray"
-            android:layout_below="@id/username"
-            android:layout_alignStart="@id/username" />
-
-        <!-- Three-dot menu -->
-        <ImageView
-            android:id="@+id/menu_icon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_more_vert"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="Options" />
-
-    </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--Post Picture -->
-    <RelativeLayout
+    <!-- Posts Feed RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/postsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6">
+        android:layout_weight="10"
+        android:clipToPadding="false" />
 
-        <!-- Post Picture -->
-        <ImageView
-            android:id="@+id/post_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/pic"
-            android:scaleType="centerCrop"
-            android:contentDescription="Post image" />
-
-
-        <TextView
-            android:id="@+id/post_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1/3"
-            android:textSize="12sp"
-            android:textColor="@android:color/white"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:background="@drawable/pill_bg"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
-            android:gravity="center" />
-    </RelativeLayout>
-
-
-
-
-
-    <!-- Likes comment and share and other -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="8dp">
-
-        <!-- Left icons (Like, Comment, Share) -->
-        <LinearLayout
-            android:id="@+id/left_actions"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <!-- Like -->
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/like"
-                android:contentDescription="Like"
-                android:layout_marginEnd="16dp"/>
-
-            <!-- Comment -->
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/comment"
-                android:contentDescription="Comment"
-                android:layout_marginEnd="16dp"/>
-
-            <!-- Share -->
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/share"
-                android:contentDescription="Share"/>
-        </LinearLayout>
-
-        <!-- Dots indicator (center) -->
-        <LinearLayout
-            android:id="@+id/dots_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <View
-                android:layout_width="6dp"
-                android:layout_height="6dp"
-                android:layout_margin="4dp"
-                android:background="@drawable/dot_selected"/>
-
-            <View
-                android:layout_width="6dp"
-                android:layout_height="6dp"
-                android:layout_margin="4dp"
-                android:background="@drawable/dot_unselected"/>
-
-            <View
-                android:layout_width="6dp"
-                android:layout_height="6dp"
-                android:layout_margin="4dp"
-                android:background="@drawable/dot_unselected"/>
-        </LinearLayout>
-
-        <!-- Save icon (right side) -->
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/save"
-            android:contentDescription="Save"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
-    </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- This is the title and user information section -->
-    <RelativeLayout
-        android:id="@+id/header_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
-
-        <!-- Person 3's profile picture -->
-        <ImageView
-            android:id="@+id/profile_picture"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/person3"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="8dp"
-            android:scaleType="centerCrop"
-            android:background="@drawable/circle"
-            android:clipToOutline="true" />
-
-
-
-
-        <!-- 'Liked by' text with person name -->
-        <TextView
-            android:id="@+id/liked_by_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/profile_picture"
-            android:layout_alignTop="@id/profile_picture"
-            android:text="Liked by craig_love and 44,686 others"
-            android:textSize="14sp" />
-
-        <!-- The main user's description -->
-        <TextView
-            android:id="@+id/description_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/liked_by_text"
-            android:layout_toEndOf="@id/profile_picture"
-            android:text="alina_life The game in Japan was amazing and I want to share some photos"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp" />
-
-    </RelativeLayout>
-
-
-
-
-
-
+    <!-- Bottom Navigation -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -571,15 +186,5 @@
             android:padding="8dp"
             android:clipToOutline="true"/>
     </LinearLayout>
-
-
-
-
-
-
-
-
-
-
 
 </LinearLayout>

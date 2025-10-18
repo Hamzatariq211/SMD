@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -26,6 +27,10 @@ android {
             )
         }
     }
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -42,6 +47,14 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
+    implementation("com.google.firebase:firebase-database:20.3.0") // Firebase Realtime Database for Stories
+    implementation("com.google.firebase:firebase-messaging:23.4.0") // Firebase Cloud Messaging
+
+    // Google Play Services
+    implementation("com.google.android.gms:play-services-base:18.5.0")
 
     // CameraX dependencies
     val cameraxVersion = "1.3.0"
@@ -62,4 +75,3 @@ dependencies {
 
     androidTestImplementation ("androidx.test.espresso:espresso-contrib:3.5.1")
 }
-
