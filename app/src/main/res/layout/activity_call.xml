@@ -1,96 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/bg_gradient"
     tools:context=".callScreen">
 
-    <!-- Largest Part -->
-    <LinearLayout
+    <!-- Remote Video Container (Full Screen) -->
+    <FrameLayout
+        android:id="@+id/remoteVideoContainer"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_height="match_parent"
+        android:background="#000000" />
+
+    <!-- Local Video Container (Small Preview) -->
+    <FrameLayout
+        android:id="@+id/localVideoContainer"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp"
+        android:background="#000000"
+        android:elevation="8dp" />
+
+    <!-- Top Info Container -->
+    <LinearLayout
+        android:id="@+id/topInfoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:orientation="vertical"
         android:gravity="center"
-        >
+        android:padding="24dp"
+        android:background="@drawable/bg_gradient">
 
-        <!-- Rounded Rectangle Picture -->
+        <!-- Profile Image (for audio calls) -->
         <ImageView
             android:id="@+id/ivProfile"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:src="@drawable/dm1"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/profile"
             android:scaleType="centerCrop"
-            android:background="@drawable/rounded_rectangle"
+            android:background="@drawable/circle_shape"
             android:clipToOutline="true"
-            android:contentDescription="Profile Picture" />
+            android:contentDescription="Profile Picture"
+            android:visibility="gone" />
 
         <!-- Username -->
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Johnny"
-            android:textSize="20sp"
+            android:text="User"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_marginTop="12dp"
-            android:textColor="@android:color/black" />
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/white"
+            android:shadowColor="#80000000"
+            android:shadowRadius="4" />
+
+        <!-- Call Status -->
+        <TextView
+            android:id="@+id/tvCallStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Connecting..."
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:textColor="@android:color/white"
+            android:alpha="0.8" />
 
         <!-- Call Duration -->
         <TextView
             android:id="@+id/tvDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3:01"
+            android:text="00:00"
             android:textSize="16sp"
             android:layout_marginTop="4dp"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
-
-    <!-- Medium Part -->
-    <!-- Medium Part -->
+    <!-- Bottom Controls Container -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
         android:gravity="center"
-        android:padding="16dp">
+        android:padding="24dp">
 
-        <!-- Messenger -->
-        <ImageView
-            android:id="@+id/ivMessenger"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/messenger"
-            android:contentDescription="Messenger"
-            android:layout_marginHorizontal="24dp" />
+        <!-- Control Buttons Row 1 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
 
-        <!-- End Call -->
+            <!-- Mute Button -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="12dp">
+
+                <ImageView
+                    android:id="@+id/ivMute"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_mic_on"
+                    android:background="@drawable/circle_shape"
+                    android:backgroundTint="#80FFFFFF"
+                    android:padding="12dp"
+                    android:contentDescription="Mute" />
+            </LinearLayout>
+
+            <!-- Speaker Button -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="12dp">
+
+                <ImageView
+                    android:id="@+id/ivSpeaker"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/speaker"
+                    android:background="@drawable/circle_shape"
+                    android:backgroundTint="#80FFFFFF"
+                    android:padding="12dp"
+                    android:contentDescription="Speaker" />
+            </LinearLayout>
+
+            <!-- Switch Camera Button -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="12dp">
+
+                <ImageView
+                    android:id="@+id/ivSwitchCamera"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_switch_camera"
+                    android:background="@drawable/circle_shape"
+                    android:backgroundTint="#80FFFFFF"
+                    android:padding="12dp"
+                    android:contentDescription="Switch Camera" />
+            </LinearLayout>
+
+            <!-- Toggle Video Button -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="12dp">
+
+                <ImageView
+                    android:id="@+id/ivToggleVideo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_video_on"
+                    android:background="@drawable/circle_shape"
+                    android:backgroundTint="#80FFFFFF"
+                    android:padding="12dp"
+                    android:contentDescription="Toggle Video" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- End Call Button (Separate Row) -->
         <ImageView
             android:id="@+id/ivEndCall"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:src="@drawable/endcall"
-            android:contentDescription="End Call"
-            android:layout_marginHorizontal="24dp" />
-
-        <!-- Speaker -->
-        <ImageView
-            android:id="@+id/ivSpeaker"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/speaker"
-            android:contentDescription="Speaker"
-            android:layout_marginHorizontal="24dp" />
+            android:background="@drawable/circle_shape"
+            android:backgroundTint="#F44336"
+            android:padding="16dp"
+            android:contentDescription="End Call" />
 
     </LinearLayout>
 
-
-
-</LinearLayout>
+</RelativeLayout>

@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.hamzatariq.i210396.HomePage
+import com.hamzatariq.i210396.IncomingCallActivity
 import com.hamzatariq.i210396.Messages
 import com.hamzatariq.i210396.R
 import com.hamzatariq.i210396.chatScreen
@@ -54,6 +55,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 }
                 "screenshot_alert" -> {
                     showScreenshotAlert(title, body)
+                }
+                "incoming_call" -> {
+                    val callId = remoteMessage.data["callId"] ?: ""
+                    val callType = remoteMessage.data["callType"] ?: "video"
+                    val channelName = remoteMessage.data["channelName"] ?: ""
+                    showIncomingCallNotification(title, body, senderId, senderName, senderImage, callId, callType, channelName)
                 }
                 else -> {
                     showDefaultNotification(title, body)
@@ -208,6 +215,54 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager.notify(System.currentTimeMillis().toInt(), notificationBuilder.build())
     }
 
+    private fun showIncomingCallNotification(title: String, body: String, senderId: String, senderName: String, senderImage: String, callId: String, callType: String, channelName: String) {
+        val intent = Intent(this, IncomingCallActivity::class.java).apply {
+            putExtra("callId", callId)
+            putExtra("callerId", senderId)
+            putExtra("callerName", senderName)
+            putExtra("callerImageUrl", senderImage)
+            putExtra("callType", callType)
+            putExtra("channelName", channelName)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            callId.hashCode(),
+            intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val channelId = "calls_channel"
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.phone)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+            .setFullScreenIntent(pendingIntent, true)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(body))
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Calls",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Notifications for incoming calls"
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        notificationManager.notify(callId.hashCode(), notificationBuilder.build())
+    }
+
     private fun showDefaultNotification(title: String, body: String) {
         val intent = Intent(this, HomePage::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -252,4 +307,3 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         private const val TAG = "FCMService"
     }
 }
-

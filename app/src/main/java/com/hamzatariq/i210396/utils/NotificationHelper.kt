@@ -231,6 +231,49 @@ object NotificationHelper {
         }
     }
 
+    /**
+     * Send notification for incoming calls
+     */
+    fun sendCallNotification(
+        receiverId: String,
+        callerName: String,
+        callerImage: String,
+        callId: String,
+        callType: String,
+        channelName: String
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val receiverDoc = firestore.collection("users").document(receiverId).get().await()
+                val fcmToken = receiverDoc.getString("fcmToken") ?: return@launch
+
+                val notification = JSONObject().apply {
+                    put("to", fcmToken)
+                    put("priority", "high")
+
+                    val data = JSONObject().apply {
+                        put("type", "incoming_call")
+                        put("title", callerName)
+                        put("body", if (callType == "video") "Incoming video call..." else "Incoming voice call...")
+                        put("callId", callId)
+                        put("callerId", receiverId)
+                        put("callerName", callerName)
+                        put("callerImageUrl", callerImage)
+                        put("callType", callType)
+                        put("channelName", channelName)
+                    }
+                    put("data", data)
+                }
+
+                Log.d(TAG, "Sending call notification to: $receiverId")
+                // In production, call your backend API here
+                // sendToFCM(notification.toString())
+            } catch (e: Exception) {
+                Log.e(TAG, "Error sending call notification", e)
+            }
+        }
+    }
+
     // Helper method to actually send to FCM (requires server key)
     // This should be done from a backend server in production
     @Suppress("unused")

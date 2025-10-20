@@ -111,9 +111,13 @@ class chatScreen : AppCompatActivity() {
         }
 
         // Video camera click → open CallActivity
-        findViewById<ImageView>(R.id.videoCamera).setOnClickListener {
-            val intent = Intent(this, callScreen::class.java)
-            startActivity(intent)
+        findViewById<ImageView>(R.id.videoCamera)?.setOnClickListener {
+            initiateCall("video")
+        }
+
+        // Audio call button → open CallActivity for audio call
+        findViewById<ImageView>(R.id.audioCall)?.setOnClickListener {
+            initiateCall("audio")
         }
 
         // Send message button
@@ -364,5 +368,18 @@ class chatScreen : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun initiateCall(callType: String) {
+        val currentUserId = auth.currentUser?.uid ?: return
+
+        // Create an intent for the CallActivity
+        val intent = Intent(this, CallActivity::class.java).apply {
+            putExtra("userId", otherUserId)
+            putExtra("callType", callType) // "video" or "audio"
+        }
+
+        // Start the CallActivity
+        startActivity(intent)
     }
 }

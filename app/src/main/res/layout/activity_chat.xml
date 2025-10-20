@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,7 +31,7 @@
                 android:layout_height="40dp"
                 android:src="@drawable/back"
                 android:contentDescription="Back"
-                android:scaleType="centerInside"/>
+                android:scaleType="centerInside" />
 
             <!-- Profile image -->
             <ImageView
@@ -42,7 +43,7 @@
                 android:contentDescription="Profile"
                 android:scaleType="centerCrop"
                 android:background="@drawable/circlemask2"
-                android:clipToOutline="true"/>
+                android:clipToOutline="true" />
 
             <!-- Username and Status -->
             <LinearLayout
@@ -58,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:text="Johnny"
                     android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/statusText"
@@ -66,8 +67,21 @@
                     android:layout_height="wrap_content"
                     android:text="Online"
                     android:textSize="12sp"
-                    android:textColor="#666666"/>
+                    android:textColor="#666666" />
             </LinearLayout>
+
+            <!-- Audio Call Button -->
+            <ImageView
+                android:id="@+id/audioCall"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/phone"
+                android:contentDescription="Audio Call"
+                android:scaleType="centerInside"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@android:color/black" />
 
             <!-- Video camera icon -->
             <ImageView
@@ -77,16 +91,11 @@
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/videocamera"
                 android:contentDescription="Video Call"
-                android:scaleType="centerInside"/>
+                android:scaleType="centerInside"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
 
-            <!-- Info icon -->
-            <ImageView
-                android:id="@+id/infoIcon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/info"
-                android:contentDescription="Info"
-                android:scaleType="centerInside"/>
+
 
         </LinearLayout>
 
