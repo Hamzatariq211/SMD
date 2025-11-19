@@ -51,19 +51,22 @@ class callScreen : AppCompatActivity() {
     private var callStartTime: Long = 0
     private var durationHandler: Handler? = null
     private var durationRunnable: Runnable? = null
+    private var connectionTimeoutHandler: Handler? = null
+    private var isChannelJoined: Boolean = false
 
     private val PERMISSION_REQ_ID = 22
     private val REQUESTED_PERMISSIONS = arrayOf(
         Manifest.permission.RECORD_AUDIO,
         Manifest.permission.CAMERA
     )
+    private val CONNECTION_TIMEOUT_MS = 30000L // 30 second timeout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_call)
 
-        // Get call data
+        // Get call data from intent
         callId = intent.getStringExtra("callId") ?: ""
         channelName = intent.getStringExtra("channelName") ?: ""
         callType = intent.getStringExtra("callType") ?: "video"
@@ -72,13 +75,35 @@ class callScreen : AppCompatActivity() {
         otherUserName = intent.getStringExtra("otherUserName") ?: "User"
         otherUserImage = intent.getStringExtra("otherUserImage") ?: ""
 
+        // CRITICAL FIX: Sanitize channel name - must match what token is generated for
+        channelName = channelName.replace("-", "_")
+
+        android.util.Log.d("CallScreen", "onCreate - channelName: $channelName, callType: $callType, otherUserId: $otherUserId")
+
         initViews()
 
         if (checkSelfPermission()) {
             initializeAndJoinChannel()
+            startConnectionTimeout()
         }
 
         setupCallStatusListener()
+    }
+
+    private fun startConnectionTimeout() {
+        connectionTimeoutHandler = Handler(Looper.getMainLooper())
+        connectionTimeoutHandler?.postDelayed({
+            if (!isChannelJoined) {
+                android.util.Log.e("CallScreen", "Connection timeout - channel join failed")
+                Toast.makeText(this, "Connection timeout. Please try again.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+        }, CONNECTION_TIMEOUT_MS)
+    }
+
+    private fun cancelConnectionTimeout() {
+        connectionTimeoutHandler?.removeCallbacksAndMessages(null)
+        connectionTimeoutHandler = null
     }
 
     private fun initViews() {
@@ -193,56 +218,124 @@ class callScreen : AppCompatActivity() {
                 clientRoleType = Constants.CLIENT_ROLE_BROADCASTER
             }
 
-            // Generate Agora token for authentication
-            android.util.Log.d("CallScreen", "=== TOKEN GENERATION DEBUG ===")
+            // Generate unique UID based on user ID
+            val uid = otherUserId.hashCode() and 0x7FFFFFFF
+
+            android.util.Log.d("CallScreen", "=== TOKEN GENERATION ===")
             android.util.Log.d("CallScreen", "APP_ID: ${AgoraConfig.APP_ID}")
-            android.util.Log.d("CallScreen", "APP_CERTIFICATE: ${AgoraConfig.APP_CERTIFICATE}")
             android.util.Log.d("CallScreen", "Channel Name: $channelName")
+            android.util.Log.d("CallScreen", "UID: $uid")
 
-            val token = if (AgoraConfig.APP_CERTIFICATE.isNotEmpty()) {
-                // Generate token if certificate is available
-                val generatedToken = AgoraTokenGenerator.generateToken(
-                    channelName = channelName,
-                    uid = 0, // Use 0 for auto-assigned UID
-                    role = 1, // 1 = publisher
-                    privilegeExpiredTs = 0 // Will use default 1 hour expiration
-                )
-                android.util.Log.d("CallScreen", "Token generated: $generatedToken")
-                generatedToken
-            } else {
-                // Use null token for testing mode (must be enabled in Agora console)
-                android.util.Log.d("CallScreen", "Using null token (testing mode)")
-                null
-            }
+            // Generate token locally using AgoraTokenGenerator
+            val token = AgoraTokenGenerator.generateToken(
+                channelName = channelName,
+                uid = uid,
+                role = 1, // Broadcaster role
+                privilegeExpiredTs = AgoraTokenGenerator.getExpirationTimestamp(3600) // 1 hour
+            )
 
-            android.util.Log.d("CallScreen", "Channel: $channelName")
-            android.util.Log.d("CallScreen", "Token mode: ${if (token != null) "Authenticated" else "Testing (null)"}")
-            if (token != null) {
-                android.util.Log.d("CallScreen", "Token generated: ${if (token.isNotEmpty()) "Yes (${token.length} chars)" else "Failed"}")
-                android.util.Log.d("CallScreen", "Token preview: ${token.take(50)}...")
-                android.util.Log.d("CallScreen", "Token full: $token")
-            }
-
-            if (token != null && token.isEmpty()) {
-                Toast.makeText(this, "Failed to generate token. Check AgoraConfig.", Toast.LENGTH_LONG).show()
+            if (token.isEmpty()) {
+                android.util.Log.e("CallScreen", "❌ Failed to generate token locally")
+                Toast.makeText(this, "Failed to generate token", Toast.LENGTH_SHORT).show()
                 finish()
                 return
             }
 
-            // Join channel with generated token (or null for testing mode)
-            val result = mRtcEngine?.joinChannel(token, channelName, 0, options)
+            android.util.Log.d("CallScreen", "✅ Token generated successfully!")
+            android.util.Log.d("CallScreen", "Token length: ${token.length}")
+            android.util.Log.d("CallScreen", "Token preview: ${token.take(50)}...")
 
-            android.util.Log.d("CallScreen", "joinChannel result: $result")
-
-            if (result != 0) {
-                Toast.makeText(this, "Failed to join channel. Error code: $result", Toast.LENGTH_LONG).show()
-                finish()
-            }
+            // Join channel with the generated token
+            joinChannelWithToken(token, channelName, uid, options)
 
         } catch (e: Exception) {
-            e.printStackTrace()
             Toast.makeText(this, "Failed to initialize call: ${e.message}", Toast.LENGTH_LONG).show()
+            android.util.Log.e("CallScreen", "Exception in initializeAndJoinChannel: ${e.message}", e)
             finish()
+        }
+    }
+
+    private fun fetchTokenFromServer(channelName: String, uid: Int, options: ChannelMediaOptions) {
+        // This method is kept as a fallback but should not be called
+        // Token generation now happens locally via AgoraTokenGenerator
+        android.util.Log.d("CallScreen", "fetchTokenFromServer called - using local generation instead")
+
+        val token = AgoraTokenGenerator.generateToken(
+            channelName = channelName,
+            uid = uid,
+            role = 1,
+            privilegeExpiredTs = AgoraTokenGenerator.getExpirationTimestamp(3600)
+        )
+
+        if (token.isNotEmpty() && token.length > 50) {
+            android.util.Log.d("CallScreen", "✅ Token generated successfully!")
+            joinChannelWithToken(token, channelName, uid, options)
+        } else {
+            android.util.Log.e("CallScreen", "❌ Invalid token generated")
+            runOnUiThread {
+                Toast.makeText(this@callScreen, "Invalid token generated", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+        }
+    }
+
+    private fun joinChannelWithToken(token: String, channelName: String, uid: Int, options: ChannelMediaOptions) {
+        runOnUiThread {
+            try {
+                // Final validation before joining
+                if (mRtcEngine == null) {
+                    android.util.Log.e("CallScreen", "❌ RtcEngine is null! Cannot join channel")
+                    Toast.makeText(this@callScreen, "Engine not initialized", Toast.LENGTH_SHORT).show()
+                    finish()
+                    return@runOnUiThread
+                }
+
+                if (token.isEmpty()) {
+                    android.util.Log.e("CallScreen", "❌ Token is empty!")
+                    Toast.makeText(this@callScreen, "Invalid token", Toast.LENGTH_SHORT).show()
+                    finish()
+                    return@runOnUiThread
+                }
+
+                if (channelName.isEmpty()) {
+                    android.util.Log.e("CallScreen", "❌ Channel name is empty!")
+                    Toast.makeText(this@callScreen, "Invalid channel", Toast.LENGTH_SHORT).show()
+                    finish()
+                    return@runOnUiThread
+                }
+
+                if (uid <= 0) {
+                    android.util.Log.e("CallScreen", "❌ UID is invalid: $uid")
+                    Toast.makeText(this@callScreen, "Invalid UID", Toast.LENGTH_SHORT).show()
+                    finish()
+                    return@runOnUiThread
+                }
+
+                android.util.Log.d("CallScreen", "=== JOINING CHANNEL ===")
+                android.util.Log.d("CallScreen", "Channel: $channelName")
+                android.util.Log.d("CallScreen", "UID: $uid")
+                android.util.Log.d("CallScreen", "Token length: ${token.length}")
+                android.util.Log.d("CallScreen", "Token starts with: ${token.take(20)}...")
+                android.util.Log.d("CallScreen", "Token format check: ${token.substring(0, 3)} (should be 007 or 006)")
+
+                val result = mRtcEngine?.joinChannel(token, channelName, uid, options)
+
+                if (result != 0) {
+                    android.util.Log.e("CallScreen", "❌ joinChannel failed with error code: $result")
+                    android.util.Log.e("CallScreen", "Error meanings:")
+                    android.util.Log.e("CallScreen", "  -102 = Token invalid or credentials mismatch")
+                    android.util.Log.e("CallScreen", "  -3 = Invalid channel name")
+                    android.util.Log.e("CallScreen", "  -8 = Not initialized")
+                    Toast.makeText(this@callScreen, "Failed to join channel. Error code: $result", Toast.LENGTH_LONG).show()
+                    finish()
+                } else {
+                    android.util.Log.d("CallScreen", "✅ joinChannel successful!")
+                }
+            } catch (e: Exception) {
+                android.util.Log.e("CallScreen", "Exception in joinChannelWithToken: ${e.message}", e)
+                Toast.makeText(this@callScreen, "Error joining channel: ${e.message}", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
 
@@ -286,6 +379,9 @@ class callScreen : AppCompatActivity() {
         override fun onJoinChannelSuccess(channel: String?, uid: Int, elapsed: Int) {
             runOnUiThread {
                 callStatusText.text = "Connected"
+                isChannelJoined = true
+                // Cancel connection timeout
+                cancelConnectionTimeout()
             }
         }
 

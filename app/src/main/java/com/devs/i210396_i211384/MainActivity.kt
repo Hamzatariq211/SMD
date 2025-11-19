@@ -47,7 +47,13 @@ class MainActivity : AppCompatActivity() {
             // Get and update FCM token
             updateFCMToken()
 
-            // User is logged in, verify session with server and get latest profile status
+            // User is logged in, navigate to HomePage immediately.
+            // We'll still verify the session with the server in background, but do not
+            // block navigation to HomePage (avoids sending users to EditProfile from splash).
+            startActivity(Intent(this@MainActivity, HomePage::class.java))
+            finish()
+
+            // Verify session with server and update latest profile status in background
             lifecycleScope.launch {
                 try {
                     val response = withContext(Dispatchers.IO) {
@@ -60,28 +66,17 @@ class MainActivity : AppCompatActivity() {
                         // Update session with latest profile setup status
                         SessionManager.setProfileSetup(user.isProfileSetup)
 
-                        // Navigate based on profile setup status
-                        if (user.isProfileSetup) {
-                            // Profile is setup, go to HomePage
-                            startActivity(Intent(this@MainActivity, HomePage::class.java))
-                        } else {
-                            // Profile not setup, go to EditProfile
-                            startActivity(Intent(this@MainActivity, EditProfile::class.java))
-                        }
+                        // If server invalidates the session (unlikely here), handle by clearing session and
+                        // notifying the user from the HomePage flow instead of forcing a navigation from the splash.
                     } else {
-                        // Session invalid, logout and go to login
+                        // Session invalid on server, clear local session so next start goes to login
                         SessionManager.clearSession()
-                        startActivity(Intent(this@MainActivity, loginUser::class.java))
+                        Log.w(TAG, "Session invalidated by server; user will need to login again.")
                     }
                 } catch (e: Exception) {
-                    // Network error, use cached session data
-                    if (SessionManager.isProfileSetup()) {
-                        startActivity(Intent(this@MainActivity, HomePage::class.java))
-                    } else {
-                        startActivity(Intent(this@MainActivity, EditProfile::class.java))
-                    }
+                    // Network error: keep using cached session (already navigated to HomePage)
+                    Log.w(TAG, "Network error while verifying session: ${e.message}")
                 }
-                finish()
             }
         } else {
             // User is not logged in, go to LoginScreen

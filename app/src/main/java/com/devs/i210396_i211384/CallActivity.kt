@@ -2,27 +2,35 @@ package com.devs.i210396_i211384
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.devs.i210396_i211384.models.CallRequest
-import com.devs.i210396_i211384.services.CallService
 import com.devs.i210396_i211384.utils.AgoraConfig
-import com.devs.i210396_i211384.utils.NotificationHelper
+import com.devs.i210396_i211384.network.SessionManager
+import com.devs.i210396_i211384.network.ApiService
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CallActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
-    private lateinit var firestore: FirebaseFirestore
+    private val apiService = ApiService.create()
+
+    companion object {
+        private const val TAG = "CallActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        auth = FirebaseAuth.getInstance()
-        firestore = FirebaseFirestore.getInstance()
+        SessionManager.init(this)
 
-        val receiverId = intent.getStringExtra("userId") ?: ""
+        // Get call parameters from intent
+        val receiverId = intent.getStringExtra("receiverId") ?: ""
+        val receiverName = intent.getStringExtra("receiverName") ?: "User"
         val callType = intent.getStringExtra("callType") ?: "video"
+
+        Log.d(TAG, "CallActivity onCreate - receiverId: $receiverId, callType: $callType")
 
         if (receiverId.isEmpty()) {
             Toast.makeText(this, "Invalid user", Toast.LENGTH_SHORT).show()
@@ -30,82 +38,59 @@ class CallActivity : AppCompatActivity() {
             return
         }
 
-        initiateCall(receiverId, callType)
+        // Launch call screen immediately with basic info
+        launchCallScreen(receiverId, receiverName, callType)
     }
 
-    private fun initiateCall(receiverId: String, callType: String) {
-        val currentUserId = auth.currentUser?.uid ?: return
+    private fun launchCallScreen(receiverId: String, receiverName: String, callType: String) {
+        val currentUserId = SessionManager.getUserId()
 
-        // Get current user info
-        firestore.collection("users").document(currentUserId)
-            .get()
-            .addOnSuccessListener { document ->
-                val callerName = document.getString("username") ?: "User"
-                val callerImage = document.getString("profileImageUrl") ?: ""
+        Log.d(TAG, "Launching call screen - currentUserId: $currentUserId, receiverId: $receiverId")
 
-                // Generate unique call ID and channel name
-                val callId = "${currentUserId}_${receiverId}_${System.currentTimeMillis()}"
-                val channelName = AgoraConfig.generateChannelName(currentUserId, receiverId)
+        if (currentUserId.isNullOrEmpty()) {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
 
-                val callRequest = CallRequest(
-                    callId = callId,
-                    callerId = currentUserId,
-                    callerName = callerName,
-                    callerImageUrl = callerImage,
-                    receiverId = receiverId,
-                    callType = callType,
-                    channelName = channelName,
-                    status = "ringing"
-                )
+        // Generate channel name and call ID
+        val callId = "${currentUserId}_${receiverId}_${System.currentTimeMillis()}"
+        val channelName = AgoraConfig.generateChannelName(currentUserId, receiverId)
 
-                // Save call to Firebase
-                CallService.initiateCall(
-                    callRequest,
-                    onSuccess = {
-                        // Get receiver info and send notification
-                        getReceiverInfo(receiverId) { receiverName, receiverImage ->
-                            // Send notification to receiver
-                            NotificationHelper.sendCallNotification(
-                                receiverId = receiverId,
-                                callerName = callerName,
-                                callerImage = callerImage,
-                                callId = callId,
-                                callType = callType,
-                                channelName = channelName
-                            )
+        Log.d(TAG, "Generated callId: $callId, channelName: $channelName")
 
-                            // Start call screen
-                            val intent = Intent(this, callScreen::class.java).apply {
-                                putExtra("callId", callId)
-                                putExtra("channelName", channelName)
-                                putExtra("callType", callType)
-                                putExtra("isIncoming", false)
-                                putExtra("otherUserId", receiverId)
-                                putExtra("otherUserName", receiverName)
-                                putExtra("otherUserImage", receiverImage)
-                            }
-                            startActivity(intent)
-                            finish()
-                        }
-                    },
-                    onFailure = { error ->
-                        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
-                        finish()
-                    }
-                )
-            }
+        // Launch call screen immediately
+        val intent = Intent(this, callScreen::class.java).apply {
+            putExtra("callId", callId)
+            putExtra("channelName", channelName)
+            putExtra("callType", callType)
+            putExtra("isIncoming", false)
+            putExtra("otherUserId", receiverId)
+            putExtra("otherUserName", receiverName)
+            putExtra("otherUserImage", "") // Will load in callScreen if needed
+            putExtra("currentUserId", currentUserId)
+        }
+
+        Log.d(TAG, "Starting callScreen activity with channelName: $channelName")
+        startActivity(intent)
+        finish()
+
+        // Load receiver image in background (non-blocking)
+        loadReceiverImageInBackground(receiverId)
     }
 
-    private fun getReceiverInfo(receiverId: String, callback: (String, String) -> Unit) {
-        firestore.collection("users").document(receiverId)
-            .get()
-            .addOnSuccessListener { document ->
-                val name = document.getString("username") ?: "User"
-                val image = document.getString("profileImageUrl") ?: ""
-                callback(name, image)
+    private fun loadReceiverImageInBackground(receiverId: String) {
+        lifecycleScope.launch {
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    apiService.getUserProfile(receiverId)
+                }
+                if (response.isSuccessful) {
+                    Log.d(TAG, "Loaded receiver profile successfully")
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error loading receiver image: ${e.message}")
             }
-            .addOnFailureListener {
-                callback("User", "")
-            }
+        }
     }
 }

@@ -16,6 +16,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // CRITICAL: Add Agora Maven repository for SDK access
+        maven {
+            url = uri("https://download.agora.io/android/release")
+        }
+        maven {
+            url = uri("https://jitpack.io")
+        }
     }
 }
 
