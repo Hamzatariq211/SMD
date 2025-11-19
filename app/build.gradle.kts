@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.hamzatariq.i210396"
+    namespace = "com.devs.i210396_i211384"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.hamzatariq.i210396"
+        applicationId = "com.devs.i210396_i211384"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
@@ -66,6 +66,15 @@ dependencies {
 
     // Agora Video SDK for real-time video/audio calls
     implementation("io.agora.rtc:full-sdk:4.3.0")
+
+    // Retrofit for API calls
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

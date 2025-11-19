@@ -1,0 +1,422 @@
+package com.devs.i210396_i211384.services
+
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.media.RingtoneManager
+import android.os.Build
+import android.util.Log
+import androidx.core.app.NotificationCompat
+import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
+import com.devs.i210396_i211384.HomePage
+import com.devs.i210396_i211384.IncomingCallActivity
+import com.devs.i210396_i211384.Messages
+import com.devs.i210396_i211384.R
+import com.devs.i210396_i211384.chatScreen
+import com.devs.i210396_i211384.profileScreen
+import com.devs.i210396_i211384.network.ApiService
+import com.devs.i210396_i211384.network.SessionManager
+import com.devs.i210396_i211384.network.UpdateFCMTokenRequest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+class MyFirebaseMessagingService : FirebaseMessagingService() {
+
+    companion object {
+        private const val TAG = "FCMService"
+    }
+
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        Log.d(TAG, "Refreshed token: $token")
+
+        // Send FCM token to MySQL server
+        sendRegistrationToServer(token)
+    }
+
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        super.onMessageReceived(remoteMessage)
+
+        Log.d(TAG, "From: ${remoteMessage.from}")
+
+        // Check if message contains a data payload
+        if (remoteMessage.data.isNotEmpty()) {
+            Log.d(TAG, "Message data payload: ${remoteMessage.data}")
+
+            val notificationType = remoteMessage.data["type"] ?: ""
+            val title = remoteMessage.data["title"] ?: "Socially"
+            val body = remoteMessage.data["body"] ?: ""
+            val senderId = remoteMessage.data["senderId"] ?: ""
+            val senderName = remoteMessage.data["senderName"] ?: ""
+            val senderImage = remoteMessage.data["senderImage"] ?: ""
+
+            when (notificationType) {
+                "new_message" -> {
+                    showMessageNotification(title, body, senderId, senderName)
+                }
+                "follow_request" -> {
+                    showFollowRequestNotification(title, body, senderId)
+                }
+                "new_follower" -> {
+                    showFollowerNotification(title, body, senderId)
+                }
+                "screenshot_alert" -> {
+                    showScreenshotAlert(title, body, senderId)
+                }
+                "incoming_call" -> {
+                    val callId = remoteMessage.data["callId"] ?: ""
+                    val callType = remoteMessage.data["callType"] ?: "video"
+                    val channelName = remoteMessage.data["channelName"] ?: ""
+                    showIncomingCallNotification(title, body, senderId, senderName, senderImage, callId, callType, channelName)
+                }
+                "like", "comment" -> {
+                    showInteractionNotification(title, body, senderId)
+                }
+                else -> {
+                    showDefaultNotification(title, body)
+                }
+            }
+        }
+
+        // Check if message contains a notification payload
+        remoteMessage.notification?.let {
+            Log.d(TAG, "Message Notification Body: ${it.body}")
+            showDefaultNotification(it.title ?: "Socially", it.body ?: "")
+        }
+    }
+
+    private fun sendRegistrationToServer(token: String) {
+        SessionManager.init(applicationContext)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val apiService = ApiService.create()
+                val response = apiService.updateFCMToken(UpdateFCMTokenRequest(token))
+
+                if (response.isSuccessful) {
+                    Log.d(TAG, "FCM token updated on server")
+                } else {
+                    Log.w(TAG, "Failed to update FCM token: ${response.code()}")
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error updating FCM token", e)
+            }
+        }
+    }
+
+    private fun showMessageNotification(title: String, body: String, senderId: String, senderName: String) {
+        val intent = Intent(this, chatScreen::class.java).apply {
+            putExtra("userId", senderId)
+            putExtra("username", senderName)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            senderId.hashCode(),
+            intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val channelId = "messages_channel"
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.messenger)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(body))
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        // Create notification channel for Android O and above
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Messages",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Notifications for new messages"
+                enableVibration(true)
+                enableLights(true)
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        notificationManager.notify(senderId.hashCode(), notificationBuilder.build())
+    }
+
+    private fun showFollowRequestNotification(title: String, body: String, senderId: String) {
+        val intent = Intent(this, HomePage::class.java).apply {
+            putExtra("openTab", "notifications")
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            senderId.hashCode(),
+            intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val channelId = "follow_requests_channel"
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.like)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Follow Requests",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Notifications for follow requests"
+                enableVibration(true)
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        notificationManager.notify(senderId.hashCode(), notificationBuilder.build())
+    }
+
+    private fun showFollowerNotification(title: String, body: String, senderId: String) {
+        val intent = Intent(this, profileScreen::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            senderId.hashCode(),
+            intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val channelId = "followers_channel"
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.like)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent)
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Followers",
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = "Notifications for new followers"
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        notificationManager.notify(senderId.hashCode(), notificationBuilder.build())
+    }
+
+    private fun showScreenshotAlert(title: String, body: String, senderId: String) {
+        val intent = Intent(this, Messages::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            System.currentTimeMillis().toInt(),
+            intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val channelId = "alerts_channel"
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.messenger)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(body))
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Alerts",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Important alerts like screenshot notifications"
+                enableVibration(true)
+                enableLights(true)
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        notificationManager.notify(System.currentTimeMillis().toInt(), notificationBuilder.build())
+    }
+
+    private fun showInteractionNotification(title: String, body: String, senderId: String) {
+        val intent = Intent(this, HomePage::class.java).apply {
+            putExtra("openTab", "notifications")
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            senderId.hashCode(),
+            intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val channelId = "interactions_channel"
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.like)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent)
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Interactions",
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = "Notifications for likes, comments, and mentions"
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        notificationManager.notify(senderId.hashCode(), notificationBuilder.build())
+    }
+
+    private fun showIncomingCallNotification(
+        title: String,
+        body: String,
+        senderId: String,
+        senderName: String,
+        senderImage: String,
+        callId: String,
+        callType: String,
+        channelName: String
+    ) {
+        val intent = Intent(this, IncomingCallActivity::class.java).apply {
+            putExtra("callId", callId)
+            putExtra("callerId", senderId)
+            putExtra("callerName", senderName)
+            putExtra("callerImageUrl", senderImage)
+            putExtra("callType", callType)
+            putExtra("channelName", channelName)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            callId.hashCode(),
+            intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val channelId = "calls_channel"
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.phone)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+            .setFullScreenIntent(pendingIntent, true)
+            .setCategory(NotificationCompat.CATEGORY_CALL)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(body))
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Calls",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Incoming call notifications"
+                enableVibration(true)
+                vibrationPattern = longArrayOf(0, 1000, 500, 1000)
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        notificationManager.notify(callId.hashCode(), notificationBuilder.build())
+    }
+
+    private fun showDefaultNotification(title: String, body: String) {
+        val intent = Intent(this, HomePage::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val channelId = "default_channel"
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.messenger)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setAutoCancel(true)
+            .setSound(defaultSoundUri)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent)
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "General",
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = "General notifications"
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        notificationManager.notify(0, notificationBuilder.build())
+    }
+}

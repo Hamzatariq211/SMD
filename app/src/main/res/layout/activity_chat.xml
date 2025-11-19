@@ -95,7 +95,16 @@
                 android:padding="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"/>
 
-
+            <!-- Vanish Mode Toggle -->
+            <ImageView
+                android:id="@+id/vanishModeIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_vanish_off"
+                android:contentDescription="Vanish Mode"
+                android:scaleType="centerInside"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
 
         </LinearLayout>
 
@@ -259,12 +268,24 @@
                 android:layout_marginStart="12dp"
                 android:contentDescription="@string/app_name"/>
 
+            <!-- Send Button -->
+            <ImageView
+                android:id="@+id/btnSend"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_send"
+                android:layout_marginStart="12dp"
+                android:contentDescription="Send"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="4dp"
+                app:tint="#405DE6"/>
+
             <!-- GIF (dark rounded chip) -->
             <FrameLayout
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_marginStart="12dp"
-                >
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/btnGif"
