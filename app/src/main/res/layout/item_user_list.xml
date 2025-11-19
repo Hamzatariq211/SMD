@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Profile image with online indicator -->
+    <FrameLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/userProfileImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/profile"
+            android:background="@drawable/circle_bg"
+            android:scaleType="centerCrop"
+            android:clipToOutline="true" />
+
+        <!-- Online indicator (green dot) -->
+        <View
+            android:id="@+id/onlineIndicator"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/online_indicator"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <TextView
+            android:id="@+id/userUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="username"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/userFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Name"
+            android:textSize="14sp"
+            android:textColor="#777" />
+    </LinearLayout>
+
+    <!-- Follow Button -->
+    <Button
+        android:id="@+id/followButton"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="8dp"
+        android:minWidth="80dp"
+        android:text="Follow"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:background="@drawable/button_background"
+        android:textColor="@android:color/white"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp" />
+
+    <!-- Message button -->
+    <ImageView
+        android:id="@+id/messageButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/messenger"
+        android:scaleType="centerInside"
+        android:layout_gravity="center_vertical"
+        android:padding="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Send message" />
+
+</LinearLayout>
+
