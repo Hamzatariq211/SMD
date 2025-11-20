@@ -11,6 +11,15 @@
             </PendingDiffInfo>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/.gitignore">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/.gitignore" />
+              <option name="originalContent" value="*.iml&#10;.gradle&#10;/local.properties&#10;/.idea/caches&#10;/.idea/libraries&#10;/.idea/modules.xml&#10;/.idea/workspace.xml&#10;/.idea/navEditor.xml&#10;/.idea/assetWizardSettings.xml&#10;.DS_Store&#10;/build&#10;/captures&#10;.externalNativeBuild&#10;.cxx&#10;local.properties&#10;instagram_api/config/firebase-service-account.json&#10;&#10;" />
+              <option name="updatedContent" value="*.iml&#10;.gradle&#10;/local.properties&#10;/.idea/caches&#10;/.idea/libraries&#10;/.idea/modules.xml&#10;/.idea/workspace.xml&#10;/.idea/navEditor.xml&#10;/.idea/assetWizardSettings.xml&#10;.DS_Store&#10;/build&#10;/captures&#10;.externalNativeBuild&#10;.cxx&#10;local.properties&#10;&#10;# Firebase sensitive files - NEVER commit these&#10;instagram_api/config/firebase-service-account.json&#10;**/firebase-service-account.json&#10;&#10;# Agora SDK files (too large for Git)&#10;app/libs/*.aar&#10;app/libs/*.jar" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/AGORA_DEPENDENCY_FIX.md">
           <value>
             <PendingDiffInfo>
@@ -93,6 +102,14 @@
             <PendingDiffInfo>
               <option name="filePath" value="$PROJECT_DIR$/build_project.bat" />
               <option name="updatedContent" value="@echo off&#10;cd /d &quot;E:\Mobile dev Projects\i210396&quot;&#10;echo Building Android project...&#10;call gradlew.bat clean build&#10;pause&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/instagram_api/config/firebase-service-account.json.template">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/instagram_api/config/firebase-service-account.json.template" />
+              <option name="updatedContent" value="{&#10;  &quot;type&quot;: &quot;service_account&quot;,&#10;  &quot;project_id&quot;: &quot;YOUR_PROJECT_ID&quot;,&#10;  &quot;private_key_id&quot;: &quot;YOUR_PRIVATE_KEY_ID&quot;,&#10;  &quot;private_key&quot;: &quot;YOUR_PRIVATE_KEY&quot;,&#10;  &quot;client_email&quot;: &quot;YOUR_CLIENT_EMAIL&quot;,&#10;  &quot;client_id&quot;: &quot;YOUR_CLIENT_ID&quot;,&#10;  &quot;auth_uri&quot;: &quot;https://accounts.google.com/o/oauth2/auth&quot;,&#10;  &quot;token_uri&quot;: &quot;https://oauth2.googleapis.com/token&quot;,&#10;  &quot;auth_provider_x509_cert_url&quot;: &quot;https://www.googleapis.com/oauth2/v1/certs&quot;,&#10;  &quot;client_x509_cert_url&quot;: &quot;YOUR_CERT_URL&quot;&#10;}&#10;" />
             </PendingDiffInfo>
           </value>
         </entry>
