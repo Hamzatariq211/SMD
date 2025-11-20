@@ -64,8 +64,9 @@ dependencies {
     implementation("androidx.camera:camera-view:1.2.3")
     implementation("androidx.camera:camera-extensions:1.2.0")
 
-    // Agora Video SDK for real-time video/audio calls - Use the correct package name
-    implementation("io.agora.rtc:full-sdk:4.3.0")
+    // Agora Video SDK 4.6.0 - Using manually downloaded AAR files
+    // Place the AAR files from the downloaded SDK in app/libs/ folder
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     // Retrofit for API calls
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

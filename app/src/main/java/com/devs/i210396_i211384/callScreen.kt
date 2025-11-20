@@ -75,8 +75,8 @@ class callScreen : AppCompatActivity() {
         otherUserName = intent.getStringExtra("otherUserName") ?: "User"
         otherUserImage = intent.getStringExtra("otherUserImage") ?: ""
 
-        // CRITICAL FIX: Sanitize channel name - must match what token is generated for
-        channelName = channelName.replace("-", "_")
+        // Channel name is already properly formatted from AgoraConfig.generateChannelName
+        // Do NOT sanitize it again - token is generated based on the exact channel name
 
         android.util.Log.d("CallScreen", "onCreate - channelName: $channelName, callType: $callType, otherUserId: $otherUserId")
 
@@ -219,12 +219,16 @@ class callScreen : AppCompatActivity() {
             }
 
             // Generate unique UID based on user ID
-            val uid = otherUserId.hashCode() and 0x7FFFFFFF
+            // Ensure UID is always > 0 to avoid invalid channel join
+            var uid = otherUserId.hashCode() and 0x7FFFFFFF
+            if (uid == 0) {
+                uid = 1 // Default to 1 if hash results in 0
+            }
 
             android.util.Log.d("CallScreen", "=== TOKEN GENERATION ===")
             android.util.Log.d("CallScreen", "APP_ID: ${AgoraConfig.APP_ID}")
             android.util.Log.d("CallScreen", "Channel Name: $channelName")
-            android.util.Log.d("CallScreen", "UID: $uid")
+            android.util.Log.d("CallScreen", "UID: $uid (from otherUserId: $otherUserId)")
 
             // Generate token locally using AgoraTokenGenerator
             val token = AgoraTokenGenerator.generateToken(

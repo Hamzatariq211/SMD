@@ -16,6 +16,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // Add JCenter for better package availability
+        jcenter()
         // CRITICAL: Add Agora Maven repository for SDK access
         maven {
             url = uri("https://download.agora.io/android/release")
